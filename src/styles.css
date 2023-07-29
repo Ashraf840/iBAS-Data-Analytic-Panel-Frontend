@@ -1,1 +1,8 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: 'PoppinsRegular';
+    src: url('./assets/fonts/google/poppins/Poppins-Regular.ttf');
+}
+
+body {
+    font-family: 'PoppinsRegular';
+}
