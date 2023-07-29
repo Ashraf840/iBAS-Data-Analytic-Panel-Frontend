@@ -7,32 +7,55 @@
       close
     </mat-icon>
   </button>
-  <p class="page-header" routerLink="/">
-    Data Panel
+  <p class="page-header" routerLink="">
+    iBAS++ 
+    <span>
+      Data Analytics Panel
+    </span>
   </p>
 </mat-toolbar>
 
 <mat-sidenav-container>
   <mat-sidenav #sidenav="matSidenav">
 
-    <img class="avatar" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=761&q=80" 
+    <img class="avatar" src="https://images.unsplash.com/photo-1654110455429-cf322b40a906?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" 
       alt="profile-picture">
-    <h4 class="name">Mia Carol</h4>
+    <h4 class="name">Jamal Uddin</h4>
     <p class="designation">Admin</p>
 
     <mat-divider></mat-divider>
     
-    <button mat-button class="menu-button">
+    <!-- <mat-menu>
+      <button mat-button class="menu-button" [matMenuTriggerFor]="qaDataset">
+        <mat-icon>question_answer</mat-icon>
+        <span>Q/A Dataset</span>
+      </button>
+    </mat-menu> -->
+
+    <button mat-button class="menu-button" routerLink="/qa-dataset">
       <mat-icon>question_answer</mat-icon>
       <span>Q/A Dataset</span>
     </button>
+
+    <!-- --------------------- WORKING ON Sub-menus of "Q/A Dataset" --------------------- -->
+    <!-- <button mat-button class="menu-button" [matMenuTriggerFor]="qaDataset">
+      <mat-icon>question_answer</mat-icon>
+      <span>Q/A Dataset</span>
+    </button>
+    <mat-menu #qaDataset="matMenu">
+      <button mat-menu-item>Birds</button>
+      <button mat-menu-item>Mammals</button>
+    </mat-menu> -->
+    <!-- --------------------- WORKING ON Sub-menus of "Q/A Dataset" --------------------- -->
+
     <button mat-button class="menu-button" routerLink="/books">
       <mat-icon>book</mat-icon>
       <span>Books</span>
     </button>
     
-
   </mat-sidenav>
+
+
   <mat-sidenav-content>
     <div class="content">
       <!-- <app-dashboard></app-dashboard> -->

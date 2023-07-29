@@ -11,8 +11,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon'
 import { MatDividerModule } from '@angular/material/divider';
 
+// import { MatMenuModule } from '@angular/material/menu';
+
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { BooksModule } from './modules/books/books.module';
+import { QaDatasetModule } from './modules/qa-dataset/qa-dataset.module';
+
 
 @NgModule({
   declarations: [
@@ -30,8 +34,11 @@ import { BooksModule } from './modules/books/books.module';
     MatIconModule,
     MatDividerModule,
 
+    // MatMenuModule,
+
     DashboardModule,
     BooksModule,
+    QaDatasetModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
