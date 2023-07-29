@@ -1,6 +1,13 @@
-# ResponsiveSideNavApp
+# Responsive Side Nabar App
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.5.
+
+> **About** <br>
+A static side-navigation-bar project using **Angular Material**.
+
+## Resources
+**Youtube Links**
+- [Create a Responsive Sidebar Menu with Angular Material](https://www.youtube.com/watch?v=4CYuOiRHHA8)
 
 ## Development server
 
