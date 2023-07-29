@@ -6,6 +6,10 @@
     font-weight: 600;
 }
 
+.page-header {
+    cursor: pointer;
+}
+
 .mat-sidenav {
     margin: 16px;
     width: 200px;

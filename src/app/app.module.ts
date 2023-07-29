@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon'
 import { MatDividerModule } from '@angular/material/divider';
 
+import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { BooksModule } from './modules/books/books.module';
 
 @NgModule({
@@ -29,6 +30,7 @@ import { BooksModule } from './modules/books/books.module';
     MatIconModule,
     MatDividerModule,
 
+    DashboardModule,
     BooksModule,
   ],
   providers: [],
