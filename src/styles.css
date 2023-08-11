@@ -1,7 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
     font-family: 'PoppinsRegular';
     src: url('./assets/fonts/google/poppins/Poppins-Regular.ttf');
 }
+
+@import "~@ng-select/ng-select/themes/default.theme.css";
 
 body {
     font-family: 'PoppinsRegular';

@@ -12,7 +12,7 @@ A static side-navigation-bar project using **Angular Material**.
 ## Assets
 **Fonts**
 - [Google Fonts - Poppins](https://fonts.google.com/specimen/Poppins) <br>
-**Installed the zip files of "__.ttf__" into the project's following directory: "__ResponsiveSideNavApp/src/assets/fonts/google/poppins__".
+**Installed the zip files of "__.ttf__" into the project's following directory: "__IbasDataAnalyticsPanel/src/assets/fonts/google/poppins__".
 
 ## Development server
 

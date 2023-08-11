@@ -1,0 +1,167 @@
+<div
+  class="flex items-center justify-center h-full w-full px-4 py-4 mx-auto rounded-lg"
+>
+  <form
+    [formGroup]="form"
+    (ngSubmit)="addQuestionAnswerSet()"
+    class="w-full max-w-5xl text-xl rounded-lg border-2 border-slate-100 p-3 shadow-2xl mb-20"
+  >
+    <!-- Bangla Question Input -->
+    <div class="md:flex md:items-center mb-6">
+      <div class="md:w-1/4">
+        <label
+          class="block font-bold md:text-center mb-1 md:mb-0 pr-4"
+          for="inline-full-name"
+        >
+          Bangla Question
+        </label>
+      </div>
+      <div class="md:w-3/4">
+        <div class="w-full">
+          <ng-select
+            formControlName="bangla_ques"
+            [items]="bnQuestions"
+            bindLabel="question"
+            bindValue="question"
+            placeholder="Select bangla question"
+            (change)="onBnQuesChange($event)"
+            [clearable]="false"
+          ></ng-select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Transliterated Question Input -->
+    <div class="md:flex md:items-center mb-6">
+      <div class="md:w-1/4">
+        <label
+          class="block font-bold md:text-center mb-1 md:mb-0 pr-4"
+          for="inline-full-name"
+        >
+          Transliterated Question
+        </label>
+      </div>
+      <div class="md:w-3/4">
+        <div class="w-full">
+          <ng-select
+            formControlName="transliterated_ques"
+            [items]="transQuestions"
+            bindLabel="question"
+            bindValue="question"
+            placeholder="Select transliterated question"
+            (change)="onTransQuesChange($event)"
+            [clearable]="false"
+          ></ng-select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bangla Answer Input -->
+    <div class="md:flex md:items-center mb-6">
+      <div class="md:w-1/4">
+        <label
+          class="block font-bold md:text-center mb-1 md:mb-0 pr-4"
+          for="inline-full-name"
+        >
+          Bangla Answer
+        </label>
+      </div>
+      <div class="md:w-3/4">
+        <div class="w-full">
+          <ng-select
+            formControlName="bangla_ans"
+            [items]="bnAnswers"
+            bindLabel="answer"
+            bindValue="answer"
+            placeholder="Select bangla answer"
+            [clearable]="false"
+            (change)="onBnAnsChange($event)"
+          ></ng-select>
+        </div>
+      </div>
+    </div>
+
+    <!-- English Question Input -->
+    <div class="md:flex md:items-center mb-6">
+      <div class="md:w-1/4">
+        <label
+          class="block font-bold md:text-center mb-1 md:mb-0 pr-4"
+          for="inline-full-name"
+        >
+          English Question
+        </label>
+      </div>
+      <div class="md:w-3/4">
+        <div class="w-full">
+          <ng-select
+            formControlName="english_ques"
+            [items]="enQuestions"
+            bindLabel="question"
+            bindValue="question"
+            placeholder="Select english question"
+            (change)="onEnQuesChange($event)"
+            [clearable]="false"
+          ></ng-select>
+        </div>
+      </div>
+    </div>
+
+    <!-- English Answer Input -->
+    <div class="md:flex md:items-center mb-6">
+      <div class="md:w-1/4">
+        <label
+          class="block font-bold md:text-center mb-1 md:mb-0 pr-4"
+          for="inline-full-name"
+        >
+          English Answer
+        </label>
+      </div>
+      <div class="md:w-3/4">
+        <div class="w-full">
+          <ng-select
+            formControlName="english_ans"
+            [items]="enAnswers"
+            bindLabel="answer"
+            bindValue="answer"
+            placeholder="Select english answer"
+            [clearable]="false"
+            (change)="onEnAnsChange($event)"
+          ></ng-select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Created By Input -->
+    <div class="md:flex md:items-center mb-6">
+      <div class="md:w-1/4">
+        <label
+          class="block font-bold md:text-center mb-1 md:mb-0 pr-4"
+          for="inline-full-name"
+        >
+          Created By
+        </label>
+      </div>
+      <div class="md:w-3/4">
+        <input
+          class="appearance-none border-2 border-gray-200 rounded-lg w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:border-slate-400"
+          id="inline-full-name"
+          formControlName="created_by"
+          name="created_by"
+          type="text"
+          placeholder="Created By"
+        />
+      </div>
+    </div>
+
+    <div class="md:flex md:items-center">
+      <div class="md:w-1/3"></div>
+      <div class="md:w-full md:flex md:justify-left">
+        <input
+          type="submit"
+          value="Create"
+          class="shadow w-1/3 bg-blue-600 hover:bg-blue-700 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded-lg hover:cursor-pointer"
+        />
+      </div>
+    </div>
+  </form>
+</div>

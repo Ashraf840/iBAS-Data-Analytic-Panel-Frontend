@@ -13,18 +13,23 @@ import { MatDividerModule } from '@angular/material/divider';
 
 // import { MatMenuModule } from '@angular/material/menu';
 
-import { DashboardModule } from './modules/dashboard/dashboard.module';
-import { BooksModule } from './modules/books/books.module';
-import { QaDatasetModule } from './modules/qa-dataset/qa-dataset.module';
+// import { DashboardModule } from './modules/dashboard/dashboard.module';
+// import { BooksModule } from './modules/books/books.module';
+// import { QaDatasetModule } from './modules/qa-dataset/qa-dataset.module';
+import { IdapAdminModule } from './modules/idap-admin/idap-admin.module';
+// import { LanguageComponent } from './qa-dataset/components/language/language.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    // LanguageComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
 
     BrowserAnimationsModule,
 
@@ -36,9 +41,11 @@ import { QaDatasetModule } from './modules/qa-dataset/qa-dataset.module';
 
     // MatMenuModule,
 
-    DashboardModule,
-    BooksModule,
-    QaDatasetModule,
+    // DashboardModule,
+    // BooksModule,
+    // QaDatasetModule,
+
+    IdapAdminModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

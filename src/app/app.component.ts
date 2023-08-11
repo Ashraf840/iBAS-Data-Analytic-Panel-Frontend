@@ -9,7 +9,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'ResponsiveSideNavApp';
+  title = 'IbasDataAnalyticsPanel';
 
   @ViewChild(MatSidenav) 
   sidenav!: MatSidenav;
