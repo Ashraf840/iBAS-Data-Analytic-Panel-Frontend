@@ -3,7 +3,9 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.5.
 
 > **About** <br>
-A static side-navigation-bar project using **Angular Material**.
+A static side-navigation-bar project using **Angular Material**. <br>
+This project is evolved into the "**iBAS-Data-Analytics-Panel-Frontend**" <br>
+Its backend repo is located here: [iBAS-Data-Analytic-Panel-Backend](https://github.com/Ashraf840/iBAS-Data-Analytic-Panel-Backend/tree/ft_code_structure_design_initial_api_building)
 
 ## Resources
 **Youtube Links**
