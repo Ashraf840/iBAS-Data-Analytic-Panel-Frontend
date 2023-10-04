@@ -18,6 +18,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { IdapAdminModule } from './modules/idap-admin/idap-admin.module';
 // import { LanguageComponent } from './qa-dataset/components/language/language.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -29,15 +30,13 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-
+    CommonModule,
     BrowserAnimationsModule,
-
     MatToolbarModule,
     MatSidenavModule,
     MatButtonModule,
     MatIconModule,
     MatDividerModule,
-
     // MatMenuModule,
 
     // DashboardModule,

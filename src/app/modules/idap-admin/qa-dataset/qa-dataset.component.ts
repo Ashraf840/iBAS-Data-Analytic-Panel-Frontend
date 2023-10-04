@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { QuestionAnswerService } from './services/question-answer.service';
-import { Question } from './components/question/types/question';
+// import { Question } from './components/question/types/question';
 
 @Component({
   selector: 'app-qa-dataset',
