@@ -27,6 +27,9 @@ import { NewQuestionAnswerComponent } from './cud_components/new-question-answer
 import { UpdateQuestionAnswerComponent } from './cud_components/update-question-answer/update-question-answer.component';
 import { QaDatasetRoutingModule } from './qa-dataset-routing.module';
 import { ListQuestionAnswerComponent } from './cud_components/list-question-answer/list-question-answer.component';
+import { SuggestiveQaComponent } from './suggestive-qa/suggestive-qa.component';
+import { SuggestiveQaService } from './services/suggestive-qa.service';
+import { FinalDatasetComponent } from './final-dataset/final-dataset.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,8 @@ import { ListQuestionAnswerComponent } from './cud_components/list-question-answ
     NewQuestionAnswerComponent,
     UpdateQuestionAnswerComponent,
     ListQuestionAnswerComponent,
+    SuggestiveQaComponent,
+    FinalDatasetComponent,
   ],
   imports: [
     QaDatasetRoutingModule,
@@ -43,9 +48,10 @@ import { ListQuestionAnswerComponent } from './cud_components/list-question-answ
     MatFormFieldModule,
     MatSelectModule,
     NgSelectModule,
-    ReactiveFormsModule, // Require while using "formGroup" in the HTML template
-    FormsModule, // Require while using "formGroup" in the HTML template
+    ReactiveFormsModule,
+    FormsModule,
   ],
   exports: [QaDatasetComponent],
+  providers: [SuggestiveQaService],
 })
 export class QaDatasetModule { }

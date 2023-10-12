@@ -8,11 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class QuestionAnswerService {
   constructor(private http: HttpClient) { }
-
   private QuestionAnswerCLUrl: string =
-    // 'http://127.0.0.1:8080/qa-dataset/api/qa-dataset/';
     'http://127.0.0.1:8082/qa-dataset/api/qa-dataset/';
-
   private QnaDatasetAppendUrl: string =
     "http://127.0.0.1:8082/add-to-dataset/";
 
@@ -20,10 +17,8 @@ export class QuestionAnswerService {
     return this.http.get<QuestionAnswer[]>(this.QuestionAnswerCLUrl);
   }
 
-  // createQuestionAnswer
   addQA(questionAnswer: QuestionAnswer): Observable<QuestionAnswer> {
     console.log(`questionAnswer: `, questionAnswer);
-    // return this.http.post<QuestionAnswer>(this.QuestionAnswerCLUrl, questionAnswer);
     return this.http.post<QuestionAnswer>(this.QuestionAnswerCLUrl, questionAnswer);
   }
 
@@ -31,6 +26,5 @@ export class QuestionAnswerService {
   addToDataset(qna: QnA): Observable<QnA> {
     console.log(`qna:`, qna);
     return this.http.post<QnA>(this.QnaDatasetAppendUrl, qna);
-    // return this.http.post<QnA>(this.QnaDatasetAppendUrl.concat(qna,"/"), qna);
   }
 }

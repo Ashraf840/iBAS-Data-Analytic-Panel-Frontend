@@ -11,8 +11,8 @@ import { AppIdapAdminRoutingModule } from './idap-admin-routing.module';
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule, DashboardModule, QaDatasetModule,AppIdapAdminRoutingModule],
+  imports: [CommonModule, DashboardModule, QaDatasetModule, AppIdapAdminRoutingModule],
   // providers: [LanguageService, AnswerService, QuestionService, QuestionAnswerService],
   providers: [QuestionAnswerService],
 })
-export class IdapAdminModule {}
+export class IdapAdminModule { }

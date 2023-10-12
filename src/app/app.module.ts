@@ -19,6 +19,8 @@ import { IdapAdminModule } from './modules/idap-admin/idap-admin.module';
 // import { LanguageComponent } from './qa-dataset/components/language/language.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+// import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+
 
 
 @NgModule({

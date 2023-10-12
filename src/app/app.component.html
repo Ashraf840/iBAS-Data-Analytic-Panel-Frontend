@@ -24,13 +24,6 @@
     <p class="designation">Admin</p>
 
     <mat-divider></mat-divider>
-    
-    <!-- <mat-menu>
-      <button mat-button class="menu-button" [matMenuTriggerFor]="qaDataset">
-        <mat-icon>question_answer</mat-icon>
-        <span>Q/A Dataset</span>
-      </button>
-    </mat-menu> -->
 
     <!-- <button mat-button class="menu-button" routerLink="/qa-dataset"> -->
     <button mat-button class="menu-button" routerLink="/idap-admin/qa-dataset/list">
@@ -38,39 +31,15 @@
       <span>Q/A Dataset</span>
     </button>
 
-    <a href="http://127.0.0.1:8081/generated_text_from_hf/import-questions/">
-      <button mat-button class="menu-button">
-        <mat-icon>backup</mat-icon>
-        <span>Suggestive Q/A</span>
-      </button>
-    </a>
-
-    <!-- <button mat-button class="menu-button" routerLink="/qa-dataset/language">
-      <mat-icon>language</mat-icon>
-      <span>Language</span>
+    <button mat-button class="menu-button" routerLink="/idap-admin/qa-dataset/suggestive-qa">
+      <mat-icon>backup</mat-icon>
+      <span>Suggestive Q/A</span>
     </button>
 
-    <button mat-button class="menu-button" routerLink="/qa-dataset/answer">
-      <mat-icon>queue</mat-icon>
-      <span>Answer</span>
+    <button mat-button class="menu-button" routerLink="/idap-admin/qa-dataset/final-dataset">
+      <mat-icon>receipt</mat-icon>
+      <span>Final Dataset</span>
     </button>
-
-    <button mat-button class="menu-button" routerLink="qa-dataset/question">
-      <mat-icon>query_builder</mat-icon>
-      <span>Question</span>
-    </button> -->
-
-    <!-- --------------------- WORKING ON Sub-menus of "Q/A Dataset" --------------------- -->
-    <!-- <button mat-button class="menu-button" [matMenuTriggerFor]="qaDataset">
-      <mat-icon>question_answer</mat-icon>
-      <span>Q/A Dataset</span>
-    </button>
-    <mat-menu #qaDataset="matMenu">
-      <button mat-menu-item>Birds</button>
-      <button mat-menu-item>Mammals</button>
-    </mat-menu> -->
-    <!-- --------------------- WORKING ON Sub-menus of "Q/A Dataset" --------------------- -->
-
   </mat-sidenav>
 
 

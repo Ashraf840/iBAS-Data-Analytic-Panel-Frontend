@@ -14,14 +14,9 @@
       <mat-icon class="home">question_answer</mat-icon>
       Create Question-Answer Set
     </button>
-    <!-- <button mat-fab extended color="accent" class="buttons-grid" routerLink="">
-      <mat-icon class="home">update</mat-icon>
-      Update Language
-    </button> -->
   </div>
 </div>
 
-<!-- --------------------------------------------------------- -->
 <div
   class="items-center w-full px-4 py-4 mx-auto my-10 bg-white rounded-lg shadow-md"
 >
@@ -29,20 +24,10 @@
     <div class="flex justify-between w-full px-4 py-2">
       <div class="text-2xl font-bold text-center">Question-Answer Set List</div>
       <div
-        class="p-1 text-white bg-blue-500 rounded-md hover:bg-blue-600"
+        class="p-1 text-white text-base bg-blue-500 rounded-md hover:bg-blue-600"
       >
-        <a href="http://127.0.0.1:5000/train_automation">
-          <button mat-button class="menu-button">
-            <mat-icon>backup</mat-icon>
-            <span>Train</span>
-          </button>
-        </a>
-      </div>
-      <div
-        class="p-1 text-white bg-blue-500 rounded-md hover:bg-blue-600"
-      >
-        <a href="http://127.0.0.1:5001/suggestive_ques_gen">
-          <button mat-button class="menu-button">
+        <a>
+          <button mat-button class="menu-button" (click)="genSuggestiveQuesSuccess()">
             <mat-icon>backup</mat-icon>
             <span>Generate Suggestive Question</span>
           </button>
@@ -82,13 +67,15 @@
             <td class="px-4 py-4"> {{ qa.bangla_ans }} </td>
             <td class="px-4 py-4"> {{ qa.english_ans }} </td>
             <td class="px-4 py-4">
-              <!-- <button
-                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              >
-                Add to dataset
-              </button> -->
               <button
-                (click)="addQuestionAnswerToDataSet(qa.id)"
+                (click)="addQuestionAnswerToDataSet(
+                  qa.id,
+                  qa.bangla_ques,
+                  qa.english_ques,
+                  qa.transliterated_ques,
+                  qa.bangla_ans,
+                  qa.english_ans
+                )"
                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Add To Dataset
               </button>
@@ -99,4 +86,3 @@
     </div>
   </div>
 </div>
-<!-- --------------------------------------------------------- -->

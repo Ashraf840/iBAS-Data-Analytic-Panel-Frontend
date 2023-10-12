@@ -8,7 +8,7 @@ import { QuestionAnswerService } from './services/question-answer.service';
   styleUrls: ['./qa-dataset.component.css']
 })
 export class QaDatasetComponent implements OnInit {
-  constructor(private questionAnswerService: QuestionAnswerService) {}
+  constructor(private questionAnswerService: QuestionAnswerService) { }
 
   questionAnswers: any | undefined;
 
