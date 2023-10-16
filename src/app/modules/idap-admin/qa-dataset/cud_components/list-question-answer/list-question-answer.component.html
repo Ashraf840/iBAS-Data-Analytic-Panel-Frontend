@@ -15,7 +15,7 @@
       Create Question-Answer Set
     </button>
   </div>
-</div>
+</div>  
 
 <div
   class="items-center w-full px-4 py-4 mx-auto my-10 bg-white rounded-lg shadow-md"
@@ -58,7 +58,7 @@
         <tbody class="text-base font-normal text-gray-700">
           <tr
             class="py-10 border-b border-gray-200 hover:bg-gray-100"
-            *ngFor="let qa of questionAnswers.results.slice().reverse()"
+            *ngFor="let qa of questionAnswers?.results.slice().reverse()"
           >
             <td class="px-4 py-4"> {{ qa.id }} </td>
             <td class="px-4 py-4"> {{ qa.bangla_ques }} </td>

@@ -24,7 +24,7 @@ export class ListQuestionAnswerComponent {
   ngOnInit(): void {
     this.questionAnswerService.getQAList().subscribe(data => {
       this.questionAnswers = data;
-      console.log(`Q/A List:`, this.questionAnswers);
+      // console.log(`Q/A List:`, this.questionAnswers);
     });
   }
 

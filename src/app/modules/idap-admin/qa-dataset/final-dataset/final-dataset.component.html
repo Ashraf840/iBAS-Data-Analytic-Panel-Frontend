@@ -4,7 +4,7 @@
 >
   <div class="container mx-auto">
     <div class="flex justify-between w-full px-4 py-2">
-      <div class="text-2xl font-bold text-center">Fina Dataset</div>
+      <div class="text-2xl font-bold text-center">Final Dataset</div>
       <div
         class="p-1 text-white bg-blue-500 rounded-md hover:bg-blue-600"
       >
@@ -22,30 +22,25 @@
           <tr class="text-base font-bold text-left bg-gray-50">
             <th class="px-4 py-3 border-b-2 border-blue-500">Id</th>
             <th class="px-4 py-3 border-b-2 border-blue-500">
-              Bangla Question
+              Question
             </th>
             <th class="px-4 py-3 border-b-2 border-green-500">
-              English Question
+              Answer
             </th>
             <th class="px-4 py-3 border-b-2 border-green-500">
-              Transliterated Question
-            </th>
-            <th class="px-4 py-3 border-b-2 border-green-500">Bangla Answer</th>
-            <th class="px-4 py-3 border-b-2 border-green-500">
-              English Answer
+              Language
             </th>
           </tr>
         </thead>
         <tbody class="text-base font-normal text-gray-700">
           <tr
             class="py-10 border-b border-gray-200 hover:bg-gray-100"
+            *ngFor="let fd of finalDataset?.slice().reverse()"
           >
-            <td class="px-4 py-4"> qa.id  </td>
-            <td class="px-4 py-4"> qa.bangla_ques  </td>
-            <td class="px-4 py-4"> qa.english_ques  </td>
-            <td class="px-4 py-4"> qa.transliterated_ques  </td>
-            <td class="px-4 py-4"> qa.bangla_ans  </td>
-            <td class="px-4 py-4"> qa.english_ans  </td>
+            <td class="px-4 py-4"> {{ fd.id }}  </td>
+            <td class="px-4 py-4"> {{ fd.question }}  </td>
+            <td class="px-4 py-4"> {{ fd.answer }}  </td>
+            <td class="px-4 py-4"> {{ fd.language }}  </td>
           </tr>
         </tbody>
       </table>

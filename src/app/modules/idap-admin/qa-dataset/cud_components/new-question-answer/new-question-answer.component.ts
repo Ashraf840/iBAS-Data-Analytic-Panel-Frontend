@@ -33,23 +33,12 @@ export class NewQuestionAnswerComponent implements OnInit {
     transliterated_ques: new FormControl('', Validators.required),
     bangla_ans: new FormControl('', Validators.required),
     english_ans: new FormControl('', Validators.required),
-    // created_by: new FormControl('', Validators.required),
   });
 
 
   addQuestionAnswerSet() {
     this.data = this.form.value;
-    console.log(`A question-asnwer dataset will be created!`);
-    console.log(`Question-Answer Dataset:`, this.data);
-
-    // console.log(`Question-Answer Dataset:`, this.data['bangla_ques']);
-    // console.log(`Question-Answer Dataset:`, this.data['transliterated_ques']);
-    // console.log(`Question-Answer Dataset:`, this.data['bangla_ans']);
-    // console.log(`Question-Answer Dataset:`, this.data['english_ques']);
-    // console.log(`Question-Answer Dataset:`, this.data['english_ans']);
     this.questionAnswerService.addQA(this.data).subscribe((data) => {
-      // this.router.navigate(['qa-dataset/']);
-      // this.router.navigate(['/idap-admin/qa-dataset/list']);
       this.router.navigate(['/idap-admin/qa-dataset/list']);
     });
   }
