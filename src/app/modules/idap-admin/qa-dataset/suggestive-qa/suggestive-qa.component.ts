@@ -3,6 +3,8 @@ import { SuggestiveQaService } from '../services/suggestive-qa.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { QuestionAnswerService } from '../services/question-answer.service';
 import { Router } from '@angular/router';
+import { GenerateSuggestiveQaService } from '../services/generate-suggestive-qa.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -20,6 +22,7 @@ export class SuggestiveQaComponent implements OnInit {
   constructor(
     private suggestiveQaService: SuggestiveQaService,
     private questionAnswerService:QuestionAnswerService,
+    private generateSuggestiveQaService:GenerateSuggestiveQaService,
     private router:Router,
   ) { }
 
@@ -60,6 +63,14 @@ export class SuggestiveQaComponent implements OnInit {
     this.data = this.form.value;
     this.questionAnswerService.addQA(this.data).subscribe((data) => {
       this.router.navigate(['/idap-admin/qa-dataset/list']);
+    });
+  }
+
+  genSuggestiveQuesSuccess() {
+    this.generateSuggestiveQaService.genSuggetiveQuesStat().subscribe((data) => {
+      console.log("Generate suggestive question payload:", data);
+      
+      Swal.fire('Completed!', 'Succesfully generated suggestive questions!', 'success')
     });
   }
 }
