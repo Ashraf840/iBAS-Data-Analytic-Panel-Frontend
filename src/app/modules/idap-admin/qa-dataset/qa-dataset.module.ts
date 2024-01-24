@@ -30,6 +30,7 @@ import { ListQuestionAnswerComponent } from './cud_components/list-question-answ
 import { SuggestiveQaComponent } from './suggestive-qa/suggestive-qa.component';
 import { SuggestiveQaService } from './services/suggestive-qa.service';
 import { FinalDatasetComponent } from './final-dataset/final-dataset.component';
+import { WebsocketService } from './services/websocket.service';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,9 @@ import { FinalDatasetComponent } from './final-dataset/final-dataset.component';
     FormsModule,
   ],
   exports: [QaDatasetComponent],
-  providers: [SuggestiveQaService],
+  providers: [
+    SuggestiveQaService,
+    WebsocketService
+  ],
 })
 export class QaDatasetModule { }

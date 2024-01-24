@@ -30,6 +30,8 @@ export class SuggestiveQaComponent implements OnInit {
 
   ngOnInit(): void {
     this.suggestiveQaService.getSuggestiveQuesList().subscribe(data => {
+      // console.log(`Suggestive-qa is called!`);
+      
       this.suggestiveQues = data;
       // console.log(this.suggestiveQues);
       

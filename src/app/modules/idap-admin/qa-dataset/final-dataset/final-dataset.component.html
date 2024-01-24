@@ -4,16 +4,26 @@
 >
   <div class="container mx-auto">
     <div class="flex justify-between w-full px-4 py-2">
-      <div class="text-2xl font-bold text-center">Final Dataset</div>
+      <div class="py-2 px-5 text-2xl font-bold text-center flex items-center">Final Dataset</div>
+      <div class="py-2 px-5 w-1/2 flex items-center" *ngIf="showProgressbar">
+        <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
+          <div class="bg-blue-600 text-xs font-bold text-xl text-blue-100 text-center p-1 leading-none rounded-full" [style.width.%]="percentage">{{ percentage }}%</div>
+        </div>
+      </div>
       <div
-        class="p-1 text-white bg-blue-500 rounded-md hover:bg-blue-600"
+        class="py-2 px-5 text-white bg-blue-500 rounded-md hover:bg-blue-600"
+        (click)="start_train()"
       >
-        <a href="http://127.0.0.1:8082/final-dataset/start-training/" >
+        <button mat-button class="menu-button" [disabled]="isModelTraining">
+          <mat-icon>backup</mat-icon>
+          <span>Train Model</span>
+        </button>
+        <!-- <a href="http://127.0.0.1:8082/final-dataset/start-training/" >
           <button mat-button class="menu-button">
             <mat-icon>backup</mat-icon>
             <span>Train</span>
           </button>
-        </a>
+        </a> -->
       </div>
     </div>
     <div class="mt-6 overflow-x-auto">
