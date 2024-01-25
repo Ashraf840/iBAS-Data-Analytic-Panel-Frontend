@@ -1,0 +1,10 @@
+<ng-select [items]="items"
+    class="custom"
+    bindLabel="label"
+    [multiple]="true"
+    bindValue="value" 
+    placeholder="{{placeholder}}"
+    [hideSelected]="true"
+    [(ngModel)]="value"
+    [disabled]="isDisabled" (change)="onChanged($event)" (blur)="onBlur()">
+</ng-select>

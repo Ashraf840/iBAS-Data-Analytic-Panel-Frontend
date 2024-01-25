@@ -2,13 +2,89 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @font-face {
     font-family: 'PoppinsRegular';
     src: url('./assets/fonts/google/poppins/Poppins-Regular.ttf');
 }
 
 @import "~@ng-select/ng-select/themes/default.theme.css";
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+
 
 body {
     font-family: 'PoppinsRegular';
+    margin: 0; background-color: #fafafa; font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.mat-list-item-content {
+    color: #fff !important;
+}
+
+.mat-row {
+  min-height: 42px !important;
+}
+
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+  }
+
+
+  .mat-table {
+    width: 100%;
+    min-width: 1000px;
+    overflow-y: scroll;
+    display: table;
+    border-collapse: collapse;
+    text-overflow: ellipsis;
+  }
+
+  .mat-cell {
+    font-size: 15px;
+    margin-right: 10px;
+  }
+
+  .mat-header-cell {
+    font-size: 15px;
+    padding-right: 10px;
+  }
+  .mat-paginator, .mat-paginator-page-size .mat-select-trigger {
+    font-size: 15px;
+  }
+  .ng-select.ng-select-single .ng-select-container {
+    height: 46px !important;
+  }
+  
+  .ng-select.custom .ng-select-container  {            
+    height: 46px !important;
+  }
+  
+  .ng-select.custom .ng-select-container .ng-value-container .ng-placeholder {
+    padding-top: 7px;
+    padding-left: 7px;
+  }
+
+  .page-title {
+    padding-top: 7px;
+  }
+
+  .card-header {
+    padding: 1rem 1rem !important;
+    background: #f1f6f2;
+  }
+
+  .w-75 {
+    width: 75px;
+  }
+
+#substitute .mat-form-field-infix {
+    width: 700px !important;
+  }
+
+.message-box .mat-dialog-container{
+      padding:12px 0 0 0;
+      border-radius: 0;
+  }
+    

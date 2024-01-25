@@ -1,0 +1,7 @@
+<ng-select [items]="items" 
+    bindLabel="label" 
+    bindValue="value" 
+    placeholder="{{placeholder}}"
+    [(ngModel)]="value"
+    [disabled]="isDisabled" (change)="onChanged($event)" (blur)="onBlur()">
+</ng-select>

@@ -1,4 +1,4 @@
-<div
+<!-- <div
   fxLayout="row"
   fxLayoutAlign="space-between center"
   class="button-grid-container"
@@ -23,7 +23,7 @@
   <div class="container mx-auto">
     <div class="flex justify-between w-full px-4 py-2">
       <div class="text-2xl font-bold text-center">Question-Answer Set List</div>
-      <!-- <div
+       <div
         class="p-1 text-white text-base bg-blue-500 rounded-md hover:bg-blue-600"
       >
         <a>
@@ -32,7 +32,7 @@
             <span>Generate Suggestive Question</span>
           </button>
         </a>
-      </div> -->
+      </div>
     </div>
     <div class="mt-6 overflow-x-auto">
       <table class="w-full border border-collapse table-auto">
@@ -85,4 +85,49 @@
       </table>
     </div>
   </div>
+</div> -->
+
+
+
+<div class="row ques-div">
+  <div class="card-header feature-intro-container">
+    <div class="feature-intro">
+      <div class="feature-intro-item">
+        <h1 class="page-title">{{ 'Question-Answer Set List' }}</h1>
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                    <div class="row ">
+                        <div class="button-container">
+                          <div class="button-item">
+                            <app-search (searchTextEvent)="onSearch($event)"
+                                [placeholder]="'Search Question-Answer Set'"></app-search>
+                          </div>
+                          <div class="button-item">
+                            <app-button [type]="'button'" [color]="'accent'" (myclick)="goToAdd()">
+                              <i class="fas fa-plus"></i> &#160; <span class="btn-label"> Create Question-Answer Set</span
+                                >
+                            </app-button>
+                        </div>
+                        <div class="button-item">
+                          <app-button [type]="'button'" [color]="'primary'" (myclick)="genSuggestiveQuesSuccess()">
+                            <i class="fas fa-hdd"></i> &#160; <span class="btn-label"> Generate Suggestive Question</span
+                              >
+                          </app-button>
+                        </div>
+                      </div>
+                    </div>
+            </div>
+            <div class="table-responsive" *ngIf="columns.length > 0">
+                <app-data-table (action)="onTableAction($event)" [dataset]="data" [columns]="columns"
+                    [listButton]="listButton" [totalCount]="totalCount" (pageChangeEvent)="pageChangeEvent($event)"
+                    (pageSortEvent)="pageSortEvent($event)" [isSelectColumnVisible]="false"
+                    [resetPagination]="resetPagination">
+                </app-data-table>
+            </div>
+        </div>
+    </div>
 </div>

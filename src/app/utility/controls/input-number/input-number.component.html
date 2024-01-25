@@ -1,0 +1,6 @@
+<ng-container>
+  <input type="number" class="app-input" [min]="0" oninput="validity.valid||(value=value);"
+    [value]="value" [placeholder]="placeholder || ''" [attr.disabled]="isDisabled ? true : null" (keypress)="keyPressNumbers($event)"
+    (change)="onKeyup($event)" (blur)="onBlur()" [id]="id"
+  />
+</ng-container>

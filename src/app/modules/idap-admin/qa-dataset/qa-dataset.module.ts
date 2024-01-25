@@ -31,6 +31,9 @@ import { SuggestiveQaComponent } from './suggestive-qa/suggestive-qa.component';
 import { SuggestiveQaService } from './services/suggestive-qa.service';
 import { FinalDatasetComponent } from './final-dataset/final-dataset.component';
 import { WebsocketService } from './services/websocket.service';
+import { UtilityModule } from 'src/app/utility/utility.module';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { MaterialModule } from 'src/app/shared/material.module';
 
 @NgModule({
   declarations: [
@@ -42,6 +45,9 @@ import { WebsocketService } from './services/websocket.service';
     FinalDatasetComponent,
   ],
   imports: [
+    UtilityModule,
+    MaterialModule,
+    SharedModule,
     QaDatasetRoutingModule,
     CommonModule,
     MatButtonModule,

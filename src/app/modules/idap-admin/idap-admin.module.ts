@@ -8,10 +8,21 @@ import { QaDatasetModule } from './qa-dataset/qa-dataset.module';
 // import { QuestionService } from './qa-dataset/components/question/services/question.service';
 import { QuestionAnswerService } from './qa-dataset/services/question-answer.service';
 import { AppIdapAdminRoutingModule } from './idap-admin-routing.module';
+import { UtilityModule } from 'src/app/utility/utility.module';
+import { MaterialModule } from 'src/app/shared/material.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule, DashboardModule, QaDatasetModule, AppIdapAdminRoutingModule],
+  imports: [
+    UtilityModule,
+    MaterialModule,
+    SharedModule,
+    CommonModule, 
+    DashboardModule, 
+    QaDatasetModule, 
+    AppIdapAdminRoutingModule
+  ],
   // providers: [LanguageService, AnswerService, QuestionService, QuestionAnswerService],
   providers: [QuestionAnswerService],
 })
