@@ -1,5 +1,5 @@
 <!-- --------------------------------------------------------- -->
-<div
+<!-- <div
   class="items-center w-full px-4 py-4 mx-auto my-10 bg-white rounded-lg shadow-md"
 >
   <div class="container mx-auto">
@@ -17,14 +17,14 @@
         <button mat-button class="menu-button" [disabled]="isModelTraining">
           <mat-icon>backup</mat-icon>
           <span>Train Model</span>
-        </button>
+        </button> -->
         <!-- <a href="http://127.0.0.1:8082/final-dataset/start-training/" >
           <button mat-button class="menu-button">
             <mat-icon>backup</mat-icon>
             <span>Train</span>
           </button>
         </a> -->
-      </div>
+      <!-- </div>
     </div>
     <div class="mt-6 overflow-x-auto">
       <table class="w-full border border-collapse table-auto">
@@ -56,4 +56,50 @@
       </table>
     </div>
   </div>
+</div> -->
+
+
+<div class="row ques-div">
+  <div class="card-header feature-intro-container">
+    <div class="feature-intro">
+      <div class="feature-intro-item">
+        <h1 class="page-title">{{ 'Final Dataset' }}</h1>
+      </div>
+    </div>
+  </div>
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                    <div class="row ">
+                        <div class="button-container">
+                          <div class="button-item"  >
+                            <app-search (searchTextEvent)="onSearch($event)"
+                                [placeholder]="'Search Final Dataset'"></app-search>
+                          </div>
+                          <div class="button-item" style="width: 40%;" *ngIf="showProgressbar">
+                            <div class="py-2 px-5 w-1/2 flex items-center">
+                              <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
+                                <div class="bg-blue-600 text-xs font-bold text-xl text-blue-100 text-center p-1 leading-none rounded-full" [style.width.%]="percentage">{{ percentage }}%</div>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="button-item">
+                          <app-button [type]="'button'" [color]="'primary'" (myclick)="start_train()">
+                            <i class="fas fa-plus"></i> &#160; <span class="btn-label">Train Model</span
+                              >
+                          </app-button>
+                      </div>
+                      </div>
+                    </div>
+            </div>
+            <div class="table-responsive" *ngIf="columns.length > 0">
+                <app-data-table (action)="onTableAction($event)" [dataset]="finalDataset" [columns]="columns"
+                    [listButton]="listButton" [totalCount]="totalCount" (pageChangeEvent)="pageChangeEvent($event)"
+                    (pageSortEvent)="pageSortEvent($event)" [isSelectColumnVisible]="false"
+                    [resetPagination]="resetPagination">
+                </app-data-table>
+            </div>
+        </div>
+    </div>
 </div>
+

@@ -74,14 +74,13 @@ export class ListQuestionAnswerComponent {
     bn_a: string,
     en_a: string
   ) {
-    console.log(`A question-asnwer dataset will be created!`);
-    console.log(`QnA Id:`, id);
     this.qnaId = id;
 
     this.questionAnswerService.addToDataset(this.qnaId).subscribe((data) => {
-      this._router.navigate(["/qa-dataset/final-dataset"], {
-        relativeTo: this._activatedRoute,
-      });
+      this.getQAList(this.offset, this.limit);
+      // this._router.navigate(["/qa-dataset/final-dataset"], {
+      //   relativeTo: this._activatedRoute,
+      // });
     });
   }
 
@@ -135,7 +134,7 @@ export class ListQuestionAnswerComponent {
 
   listButton: IButtonDescription[] = [
     {
-      listener: row => {},
+      listener: qa => this.addQuestionAnswerToDataSet(qa.id, qa.bangla_ques, qa.english_ques, qa.transliterated_ques, qa.bangla_ans, qa.english_ans),
       text: 'Add To Dataset',
       toolTip: 'Add To Dataset',
       icon: 'add',

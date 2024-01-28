@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { SuggestiveQues } from '../types/suggestive-ques';
 
@@ -11,7 +11,11 @@ export class SuggestiveQaService {
   private SuggestiveQuestionsUrl: string =
     'http://127.0.0.1:8082/suggestive-qa/';
   
-  getSuggestiveQuesList(): Observable<SuggestiveQues[]> {
-    return this.http.get<SuggestiveQues[]>(this.SuggestiveQuestionsUrl);
+  getSuggestiveQuesList(param: any): Observable<SuggestiveQues[]> {
+    let params = new HttpParams()
+      .set("limit", param.limit)
+      .set("offset", param.offset)
+      .set('searchText', param.searchText || '')
+    return this.http.get<SuggestiveQues[]>(`${this.SuggestiveQuestionsUrl}?${params.toString()}`);
   }
 }

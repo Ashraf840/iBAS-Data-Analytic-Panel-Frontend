@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FinalDatasetService } from '../services/final-dataset.service';
 import { WebsocketService } from '../services/websocket.service';
+import { Pageable, TableColumn } from 'src/app/utility/utils';
+import { Sort } from '@angular/material/sort';
+import { IButtonDescription } from 'src/app/utility/utils/button-description';
+import { ReplaySubject } from 'rxjs';
 
 @Component({
   selector: 'app-final-dataset',
@@ -18,17 +22,30 @@ export class FinalDatasetComponent implements OnInit {
   showProgressbar = false
   percentage = 0;
 
+
+  totalCount = 0;
+  searchText: string = '';
+  isLoading: boolean = false;
+  resetPagination: boolean = false;
+  private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
+
+  limit: number = 10;
+  offset: number = 0;
+
   ngOnInit(): void {
     this.websocketService.openWebsocket();
 
     // this.websocketService.messages.subscribe((message) => {
     //   console.log(`Percentage:`, message);
     // })
+    this.getFinalDataset(this.offset, this.limit, "");
+    
+  }
 
-    this.finalDatasetService.getFinalDatasetList().subscribe(data => {
-      this.finalDataset = data;
-      // console.log(`Final Dataset List:`, this.finalDataset);
-    });
+  getFinalDataset(offset: any, limit: any, searchText: string = '') {
+      this.finalDatasetService.getFinalDatasetList().subscribe(data => {
+        this.finalDataset = data;
+      });
   }
 
   start_train() {
@@ -59,4 +76,48 @@ export class FinalDatasetComponent implements OnInit {
       // console.log(`Value: ${val};   typeof: ${typeof(val)}`);
     });
   }
+
+  pageChangeEvent(event: Pageable): void {
+    this.limit = event.limit;
+    this.offset = event.offset;
+    this.getFinalDataset(event.offset, event.limit, this.searchText);
+  }
+
+  pageSortEvent(event: Sort): void {
+    this.getFinalDataset(this.offset, this.limit, this.searchText);
+  }
+
+  onTableAction(event: any): void {
+    console.log('event', event);
+  }
+
+  onSearch(searchText: string) {
+    if (searchText) {
+      this.resetPagination = true;
+    } else {
+      this.resetPagination = false;
+    }
+    this.searchText = searchText;
+    this.getFinalDataset(this.offset, this.limit, searchText);
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
+  }
+
+  reset(){
+    
+  }
+
+  columns: TableColumn[] = [
+    { columnDef: 'id', columnDefBn: 'id', header: 'Id' },
+    { columnDef: 'question', columnDefBn: 'question', header: 'Question' },
+    { columnDef: 'answer', columnDefBn: 'answer', header: 'Answer' },
+    { columnDef: 'language', columnDefBn: 'language', header: 'Language' }
+  ];
+
+  listButton: IButtonDescription[] = [
+    
+  ];
 }

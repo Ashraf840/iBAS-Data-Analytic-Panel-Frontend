@@ -5,14 +5,9 @@
 >
 </div>
 
-<!-- --------------------------------------------------------- -->
-<div
-  class="items-center w-full px-4 py-4 mx-auto my-10 bg-white rounded-lg shadow-md"
->
-  <div class="container mx-auto">
-    <div class="flex justify-between w-full px-4 py-2">
-      <div class="text-2xl font-bold text-center">Suggestive Q/A List</div>
-      <div
+    <!-- <div class="flex justify-between w-full px-4 py-2"> -->
+  
+      <!-- <div
         class="p-1 text-white text-base bg-blue-500 rounded-md hover:bg-blue-600"
       >
         <a>
@@ -21,10 +16,9 @@
             <span>Generate Suggestive Question</span>
           </button>
         </a>
-      </div>
-    </div>
-    <div class="mt-6 overflow-x-auto">
-      <table class="w-full border border-collapse table-auto">
+      </div> -->
+    <!-- </div> -->
+      <!-- <table class="w-full border border-collapse table-auto">
         <thead>
           <tr class="text-base font-bold text-left bg-gray-50">
             <th class="px-4 py-3 border-b-2 border-blue-500">Id</th>
@@ -64,16 +58,11 @@
             </td>
           </tr>
         </tbody>
-      </table>
+      </table> -->
 
-      
-
-      <!-- Modal -->
       <div *ngIf="showModal" class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
         <div class="relative w-1/2 my-6 mx-auto max-w-6xl">
-          <!--content-->
           <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-            <!--header-->
             <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
               <h3 class="text-2xl font-semibold">
                 Add to Q/A Dataset
@@ -84,7 +73,6 @@
                 </span>
               </button>
             </div>
-            <!--body-->
             <div class="relative p-6 flex-auto text-sm">
               <form class="space-y-6"
                 [formGroup]="form"
@@ -212,9 +200,6 @@
               <button class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" (click)="toggleModal()">
                 Close
               </button>
-              <!-- <button class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" (click)="toggleModal()">
-                Add
-              </button> -->
               <input
                 type="submit"
                 value="Add"
@@ -226,6 +211,45 @@
         </div>
       </div>
       <div *ngIf="showModal" class="opacity-25 fixed inset-0 z-40 bg-black"></div>
+
+
+
+
+<div class="row ques-div">
+  <div class="card-header feature-intro-container">
+    <div class="feature-intro">
+      <div class="feature-intro-item">
+        <h1 class="page-title">{{ 'Suggestive Q/A List' }}</h1>
+      </div>
     </div>
   </div>
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                    <div class="row ">
+                        <div class="button-container">
+                          <div class="button-item">
+                            <app-search (searchTextEvent)="onSearch($event)"
+                                [placeholder]="'Search Suggestive Q/A List'"></app-search>
+                          </div>
+                          
+                        <div class="button-item">
+                          <app-button [type]="'button'" [color]="'primary'" (myclick)="genSuggestiveQuesSuccess()">
+                            <i class="fas fa-hdd"></i> &#160; <span class="btn-label"> Generate Suggestive Question</span
+                              >
+                          </app-button>
+                        </div>
+                      </div>
+                    </div>
+            </div>
+            <div class="table-responsive" *ngIf="columns.length > 0">
+                <app-data-table (action)="onTableAction($event)" [dataset]="suggestiveQues" [columns]="columns"
+                    [listButton]="listButton" [totalCount]="totalCount" (pageChangeEvent)="pageChangeEvent($event)"
+                    (pageSortEvent)="pageSortEvent($event)" [isSelectColumnVisible]="false"
+                    [resetPagination]="resetPagination">
+                </app-data-table>
+            </div>
+        </div>
+    </div>
 </div>
+

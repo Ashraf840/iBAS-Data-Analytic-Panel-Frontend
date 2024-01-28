@@ -36,12 +36,12 @@
 
 
     <ng-container matColumnDef="action">
-      <mat-header-cell *matHeaderCellDef>{{'Action'}}</mat-header-cell>
+      <mat-header-cell  *matHeaderCellDef>{{'Action'}}</mat-header-cell>
       <mat-cell *matCellDef="let element, let i = index">
 
         <ng-container *ngIf="listButton.length < 3">
           
-          <button  mat-stroked-button *ngFor="let button of listButton"
+          <button style="border: 1px solid #dee2e6;"  mat-flat-button *ngFor="let button of listButton"
           matTooltip="{{ (button.toolTip || '') }}"
           [disabled]="(button.disabled && button.disabled(element))" 
           [color]="button.color? button.color : 'basic'" 

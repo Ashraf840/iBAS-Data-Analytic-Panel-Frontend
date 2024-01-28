@@ -5,12 +5,17 @@ import { QuestionAnswerService } from '../services/question-answer.service';
 import { Router } from '@angular/router';
 import { GenerateSuggestiveQaService } from '../services/generate-suggestive-qa.service';
 import Swal from 'sweetalert2';
+import { ReplaySubject } from 'rxjs';
+import { IButtonDescription } from 'src/app/utility/utils/button-description';
+import { Pageable, TableColumn } from 'src/app/utility/utils';
+import { Sort } from '@angular/material/sort';
+import { QueryParams } from 'src/app/models';
 
 
 @Component({
   selector: 'app-suggestive-qa',
   templateUrl: './suggestive-qa.component.html',
-  styleUrls: ['./suggestive-qa.component.css']
+  styleUrls: ['./suggestive-qa.component.scss']
 })
 export class SuggestiveQaComponent implements OnInit {
   suggestiveQues: any | undefined;
@@ -18,6 +23,15 @@ export class SuggestiveQaComponent implements OnInit {
   nextId: number = 1;
   showModal = false;
   suggesQuesText: string | undefined;
+
+  totalCount = 0;
+  searchText: string = '';
+  isLoading: boolean = false;
+  resetPagination: boolean = false;
+  private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
+
+  limit: number = 10;
+  offset: number = 0;
 
   constructor(
     private suggestiveQaService: SuggestiveQaService,
@@ -29,20 +43,14 @@ export class SuggestiveQaComponent implements OnInit {
   data: any | undefined;
 
   ngOnInit(): void {
-    this.suggestiveQaService.getSuggestiveQuesList().subscribe(data => {
-      // console.log(`Suggestive-qa is called!`);
-      
-      this.suggestiveQues = data;
-      // console.log(this.suggestiveQues);
-      
-      for (let index = 0; index < this.suggestiveQues.length; index++) {
-        const element = this.suggestiveQues[index];
-        // console.log([element["text"], element['is_added_to_qa_dataset']]);
-        // this.suggestiveQuesText.push(element["text"]);
-        this.suggestiveQuesText.push([element["text"], element['is_added_to_qa_dataset']]);
-      }
+    this.getSuggestiveQuestionList(this.offset, this.limit, "");
+  }
 
-      // console.log(this.suggestiveQuesText);
+  getSuggestiveQuestionList(offset: any, limit: any, searchText: string = ''){
+    let params = new QueryParams(offset, limit, '', searchText);
+    this.suggestiveQaService.getSuggestiveQuesList(params).subscribe((res: any) => {
+      this.totalCount = res.count;
+      this.suggestiveQues = res.data.map((i: any) => ({...i, text: i.is_added_to_qa_dataset}));
     });
   }
 
@@ -75,4 +83,59 @@ export class SuggestiveQaComponent implements OnInit {
       Swal.fire('Completed!', 'Succesfully generated suggestive questions!', 'success')
     });
   }
+
+  pageChangeEvent(event: Pageable): void {
+    this.limit = event.limit;
+    this.offset = event.offset;
+    this.getSuggestiveQuestionList(event.offset, event.limit, this.searchText);
+  }
+
+  pageSortEvent(event: Sort): void {
+    this.getSuggestiveQuestionList(this.offset, this.limit, this.searchText);
+  }
+
+  onTableAction(event: any): void {
+    console.log('event', event);
+  }
+
+  onSearch(searchText: string) {
+    if (searchText) {
+      this.resetPagination = true;
+    } else {
+      this.resetPagination = false;
+    }
+    this.searchText = searchText;
+    this.getSuggestiveQuestionList(this.offset, this.limit, searchText);
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
+  }
+
+  reset(){
+    
+  }
+
+  columns: TableColumn[] = [
+    { columnDef: 'id', columnDefBn: 'id', header: 'Id' },
+    { columnDef: 'answer', columnDefBn: 'answer', header: 'Suggestive Question' }
+  ];
+
+  listButton: IButtonDescription[] = [
+    {
+      listener: qa => this.toggleModal(qa.id),
+      text: 'Keep',
+      toolTip: 'Keep',
+      icon: 'add',
+      color: 'primary'
+    },
+    {
+      listener: qa => this.toggleModal(qa.id),
+      text: 'Remove',
+      toolTip: 'Remove',
+      icon: 'delete_forever',
+      color: 'warn'
+    }
+  ];
 }
