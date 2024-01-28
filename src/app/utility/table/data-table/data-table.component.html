@@ -73,5 +73,5 @@
   </mat-table>
   <!-- table pagination -->
   <mat-paginator #paginator [length]="totalCount"  (page)="pageChange($event)" 
-    [pageSize]="10" [pageSizeOptions]="[5, 10, 20, 50]" showFirstLastButtons>
+    [pageSize]="pageSizes" [pageSizeOptions]="dataLimitOptions" showFirstLastButtons>
   </mat-paginator>

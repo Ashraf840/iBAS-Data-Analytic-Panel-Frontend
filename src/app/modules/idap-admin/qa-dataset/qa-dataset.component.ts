@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { QuestionAnswerService } from './services/question-answer.service';
+import { QueryParams } from 'src/app/models';
 // import { Question } from './components/question/types/question';
 
 @Component({
@@ -13,7 +14,8 @@ export class QaDatasetComponent implements OnInit {
   questionAnswers: any | undefined;
 
   ngOnInit(): void {
-    this.questionAnswerService.getQAList().subscribe(data => {
+    let params = new QueryParams(0, undefined, '', '');
+    this.questionAnswerService.getQAList(params).subscribe(data => {
       this.questionAnswers = data;
       console.log(`Q/A List:`, this.questionAnswers);
     });

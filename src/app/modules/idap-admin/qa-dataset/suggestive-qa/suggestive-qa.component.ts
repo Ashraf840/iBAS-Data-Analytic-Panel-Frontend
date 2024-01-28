@@ -128,7 +128,8 @@ export class SuggestiveQaComponent implements OnInit {
       text: 'Keep',
       toolTip: 'Keep',
       icon: 'add',
-      color: 'primary'
+      color: 'primary',
+      disabled: qa => qa.is_added_to_qa_dataset
     },
     {
       listener: qa => this.toggleModal(qa.id),

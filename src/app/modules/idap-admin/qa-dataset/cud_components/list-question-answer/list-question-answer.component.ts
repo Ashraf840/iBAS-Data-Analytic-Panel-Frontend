@@ -45,7 +45,7 @@ export class ListQuestionAnswerComponent {
   
     this.isLoading = true;
     let params = new QueryParams(offset, limit, '', searchText);
-    this.questionAnswerService.getQAList()
+    this.questionAnswerService.getQAList(params)
       .subscribe({
         next: (data: any) => {
           console.log(data);
@@ -111,6 +111,7 @@ export class ListQuestionAnswerComponent {
       this.resetPagination = false;
     }
     this.searchText = searchText;
+    this.offset = 0;
     this.getQAList(this.offset, this.limit, searchText);
   }
 

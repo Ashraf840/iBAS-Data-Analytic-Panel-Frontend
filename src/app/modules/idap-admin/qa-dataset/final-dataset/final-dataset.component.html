@@ -93,9 +93,17 @@
                     </div>
             </div>
             <div class="table-responsive" *ngIf="columns.length > 0">
-                <app-data-table (action)="onTableAction($event)" [dataset]="finalDataset" [columns]="columns"
-                    [listButton]="listButton" [totalCount]="totalCount" (pageChangeEvent)="pageChangeEvent($event)"
-                    (pageSortEvent)="pageSortEvent($event)" [isSelectColumnVisible]="false"
+                <app-data-table
+                    [dataLimitOptions]="dataLimitOptions"
+                    [pageSizes]="pageSizes"
+                    (action)="onTableAction($event)" 
+                    [dataset]="finalDataset" 
+                    [columns]="columns"
+                    [listButton]="listButton" 
+                    [totalCount]="totalCount" 
+                    (pageChangeEvent)="pageChangeEvent($event)"
+                    (pageSortEvent)="pageSortEvent($event)" 
+                    [isSelectColumnVisible]="false"
                     [resetPagination]="resetPagination">
                 </app-data-table>
             </div>

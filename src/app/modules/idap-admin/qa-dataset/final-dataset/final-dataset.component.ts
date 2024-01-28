@@ -22,6 +22,8 @@ export class FinalDatasetComponent implements OnInit {
   showProgressbar = false
   percentage = 0;
 
+  dataLimitOptions = [15, 30, 45, 60];
+  pageSizes = 15;
 
   totalCount = 0;
   searchText: string = '';
@@ -29,10 +31,11 @@ export class FinalDatasetComponent implements OnInit {
   resetPagination: boolean = false;
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
 
-  limit: number = 10;
+  limit: number = 15;
   offset: number = 0;
 
   ngOnInit(): void {
+    this.pageSizes = this.limit;
     this.websocketService.openWebsocket();
 
     // this.websocketService.messages.subscribe((message) => {

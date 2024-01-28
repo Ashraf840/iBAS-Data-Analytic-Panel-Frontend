@@ -34,6 +34,9 @@ export class DataTableComponent implements OnInit, OnChanges {
 
   @Input () listButton: IButtonDescription[] = [];
 
+  @Input() dataLimitOptions = [5, 10, 20, 50];
+  @Input() pageSizes = 10;
+
   constructor() {}
 
   ngOnInit(): void {

@@ -13,7 +13,7 @@ export class SearchComponent {
   public trDisabled: boolean = false;
   private defaultSearchText: string = "";
   searchText = new FormControl({ value: "", disabled: this.trDisabled });
-  @ViewChild("searchPopRef") searchPopRef: ElementRef | undefined;
+  @ViewChild("searchPopRef")searchPopRef!: ElementRef;
   @Output() searchTextEvent: EventEmitter<any> = new EventEmitter();
   constructor() { }
 
@@ -29,9 +29,9 @@ export class SearchComponent {
     setTimeout(() => {
       // this.searchPopRef.nativeElement.focus();
     }, 100);
-    // fromEvent(this.searchPopRef['nativeElement'], "keyup")
-    //   .pipe(debounceTime(500), distinctUntilChanged())
-    //   .subscribe(($event: any) => {
-    //     this.searchTextEvent.emit($event.target.value.trim());
-    //   });
+    fromEvent(this.searchPopRef['nativeElement'], "keyup")
+      .pipe(debounceTime(500), distinctUntilChanged())
+      .subscribe(($event: any) => {
+        this.searchTextEvent.emit($event.target.value.trim());
+      });
   }}
