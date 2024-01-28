@@ -16,13 +16,13 @@
 
      <!-- table index column -->
      <ng-container matColumnDef="index">
-        <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+        <mat-header-cell style="font-weight: bold;" *matHeaderCellDef>#</mat-header-cell>
         <mat-cell *cdkCellDef="let i = index">{{ paginator.pageSize * paginator.pageIndex + i + 1 }}</mat-cell>
     </ng-container>
 
     <!-- table dynamic columns -->
     <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
-      <mat-header-cell *cdkHeaderCellDef mat-sort-header>{{ column.header }}</mat-header-cell>
+      <mat-header-cell style="font-weight: bold;" *cdkHeaderCellDef mat-sort-header>{{ column.header }}</mat-header-cell>
       <mat-cell *cdkCellDef="let row">{{ row[column.columnDefBn] }}</mat-cell>
     </ng-container>
   
@@ -36,8 +36,8 @@
 
 
     <ng-container matColumnDef="action">
-      <mat-header-cell  *matHeaderCellDef>{{'Action'}}</mat-header-cell>
-      <mat-cell *matCellDef="let element, let i = index">
+      <mat-header-cell style="justify-content: center; font-weight: bold;"  *matHeaderCellDef>{{'Action'}}</mat-header-cell>
+      <mat-cell style="justify-content: center;" *matCellDef="let element, let i = index">
 
         <ng-container *ngIf="listButton.length < 3">
           

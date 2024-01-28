@@ -18,25 +18,31 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav="matSidenav">
 
-    <img class="avatar" src="https://images.unsplash.com/photo-1654110455429-cf322b40a906?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" 
-      alt="profile-picture">
+    <div style="text-align: center;">
+      <div style="width: 70%; margin: 0 auto;">
+        <img style="height: 100%; width: 100%;" class="avatar" src="https://images.unsplash.com/photo-1654110455429-cf322b40a906?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" 
+        alt="profile-picture">
+      </div>
+      
     <h4 class="name">Jamal Uddin</h4>
     <p class="designation">Admin</p>
+    </div>
 
+    <mat-divider></mat-divider>
     <mat-divider></mat-divider>
 
     <!-- <button mat-button class="menu-button" routerLink="/qa-dataset"> -->
-    <button mat-button class="menu-button" routerLink="/idap-admin/qa-dataset/list">
+    <button [ngClass]="{'active': isDirectoryPath('/idap-admin/qa-dataset/list')}" mat-button class="menu-button" routerLink="/idap-admin/qa-dataset/list">
       <mat-icon class="sidebar-label-color">question_answer</mat-icon>
       <span class="sidebar-label-color">Q/A Dataset</span>
     </button>
 
-    <button mat-button class="menu-button" routerLink="/idap-admin/qa-dataset/suggestive-qa">
+    <button [ngClass]="{'active': isDirectoryPath('/idap-admin/qa-dataset/suggestive-qa')}" mat-button class="menu-button" routerLink="/idap-admin/qa-dataset/suggestive-qa">
       <mat-icon class="sidebar-label-color">backup</mat-icon>
       <span class="sidebar-label-color">Suggestive Q/A</span>
     </button>
 
-    <button mat-button class="menu-button" routerLink="/idap-admin/qa-dataset/final-dataset">
+    <button [ngClass]="{'active': isDirectoryPath('/idap-admin/qa-dataset/final-dataset')}" mat-button class="menu-button" routerLink="/idap-admin/qa-dataset/final-dataset">
       <mat-icon class="sidebar-label-color">receipt</mat-icon>
       <span class="sidebar-label-color">Final Dataset</span>
     </button>
