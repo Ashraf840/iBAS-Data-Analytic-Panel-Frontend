@@ -5,6 +5,7 @@ import { Pageable, TableColumn } from 'src/app/utility/utils';
 import { Sort } from '@angular/material/sort';
 import { IButtonDescription } from 'src/app/utility/utils/button-description';
 import { ReplaySubject } from 'rxjs';
+import { QueryParams } from 'src/app/models';
 
 @Component({
   selector: 'app-final-dataset',
@@ -46,8 +47,10 @@ export class FinalDatasetComponent implements OnInit {
   }
 
   getFinalDataset(offset: any, limit: any, searchText: string = '') {
-      this.finalDatasetService.getFinalDatasetList().subscribe(data => {
-        this.finalDataset = data;
+    let params = new QueryParams(offset, limit, '', searchText);
+      this.finalDatasetService.getFinalDatasetList(params).subscribe((data : any)=> {
+        this.finalDataset = data.results;
+        this.totalCount = data.count;
       });
   }
 

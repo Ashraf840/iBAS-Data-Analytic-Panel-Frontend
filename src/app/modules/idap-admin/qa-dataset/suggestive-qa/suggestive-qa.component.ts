@@ -50,7 +50,7 @@ export class SuggestiveQaComponent implements OnInit {
     let params = new QueryParams(offset, limit, '', searchText);
     this.suggestiveQaService.getSuggestiveQuesList(params).subscribe((res: any) => {
       this.totalCount = res.count;
-      this.suggestiveQues = res.data.map((i: any) => ({...i, text: i.is_added_to_qa_dataset}));
+      this.suggestiveQues = res.data.map((i: any) => ({...i}));
     });
   }
 
@@ -119,7 +119,7 @@ export class SuggestiveQaComponent implements OnInit {
 
   columns: TableColumn[] = [
     { columnDef: 'id', columnDefBn: 'id', header: 'Id' },
-    { columnDef: 'answer', columnDefBn: 'answer', header: 'Suggestive Question' }
+    { columnDef: 'text', columnDefBn: 'text', header: 'Suggestive Question' }
   ];
 
   listButton: IButtonDescription[] = [
@@ -132,7 +132,7 @@ export class SuggestiveQaComponent implements OnInit {
       disabled: qa => qa.is_added_to_qa_dataset
     },
     {
-      listener: qa => this.toggleModal(qa.id),
+      listener: qa => {},
       text: 'Remove',
       toolTip: 'Remove',
       icon: 'delete_forever',
