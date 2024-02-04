@@ -9,10 +9,11 @@ import { Observable } from 'rxjs';
 export class QuestionAnswerService {
   constructor(private http: HttpClient) { }
   private QuestionAnswerCLUrl: string =
-    'http://127.0.0.1:8082/qa-dataset/api/qa-dataset/';
+    //'http://127.0.0.1:8082/qa-dataset/api/qa-dataset/';
+    "http://ibasdap-api.celloscope.net/qa-dataset/api/qa-dataset/";
   private QnaDatasetAppendUrl: string =
     // "http://127.0.0.1:8082/add-to-dataset/";
-    "http://127.0.0.1:8082/final-dataset/add-to-dataset/";
+    "http://ibasdap-api.celloscope.net/final-dataset/add-to-dataset/";
 
   getQAList(): Observable<QuestionAnswer[]> {
     return this.http.get<QuestionAnswer[]>(this.QuestionAnswerCLUrl);

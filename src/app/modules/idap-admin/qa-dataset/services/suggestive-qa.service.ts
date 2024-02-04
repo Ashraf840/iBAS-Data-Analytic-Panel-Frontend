@@ -9,7 +9,7 @@ import { SuggestiveQues } from '../types/suggestive-ques';
 export class SuggestiveQaService {
   constructor(private http: HttpClient) { }
   private SuggestiveQuestionsUrl: string =
-    'http://127.0.0.1:8082/suggestive-qa/';
+    'http://ibasdap-api.celloscope.net/suggestive-qa/';
   
   getSuggestiveQuesList(): Observable<SuggestiveQues[]> {
     return this.http.get<SuggestiveQues[]>(this.SuggestiveQuestionsUrl);
