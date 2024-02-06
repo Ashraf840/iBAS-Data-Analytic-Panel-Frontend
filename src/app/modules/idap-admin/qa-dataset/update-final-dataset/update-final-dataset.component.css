@@ -1,0 +1,37 @@
+.main-div{
+    margin-right: 0px !important;
+}
+
+.myDiv{
+    padding-right: unset !important;
+    overflow-y: scroll;
+}
+
+.card-margin{
+    margin: 20px;
+}
+
+.button-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+  
+.button-container .button-item:first-child{
+    flex-grow: 1;
+}
+  
+.button-item{
+    margin: 0px 5px;
+}
+
+
+
+@media only screen and (max-width: 575px) {
+    .button-container{
+       display: block;
+    }
+    .button-container .button-item button{
+        width: 100%;
+        margin: 5px 0px;
+     }
+  }

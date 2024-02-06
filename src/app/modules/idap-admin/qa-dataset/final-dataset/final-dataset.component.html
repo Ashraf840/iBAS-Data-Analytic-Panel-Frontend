@@ -59,7 +59,7 @@
 </div> -->
 
 
-<div class="row ques-div">
+<div class="row ques-div" *ngIf="form">
   <div class="card-header feature-intro-container">
     <div class="feature-intro">
       <div class="feature-intro-item">
@@ -71,26 +71,39 @@
         <div class="card">
             <div class="card-header">
                     <div class="row ">
-                        <div class="button-container">
+                      <div class="button-container">
                           <div class="button-item"  >
                             <app-search (searchTextEvent)="onSearch($event)"
                                 [placeholder]="'Search Final Dataset By Question and Answer'"></app-search>
                           </div>
-                          <div class="button-item" style="width: 40%;" *ngIf="showProgressbar">
-                            <div class="py-2 px-5 w-1/2 flex items-center">
-                              <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
-                                <div class="bg-blue-600 text-xs font-bold text-xl text-blue-100 text-center p-1 leading-none rounded-full" [style.width.%]="percentage">{{ percentage }}%</div>
-                              </div>
-                            </div>
-                        </div>
-                        <div class="button-item">
-                          <app-button [type]="'button'" [color]="'primary'" (myclick)="start_train()">
-                            <i class="fas fa-plus"></i> &#160; <span class="btn-label">Train Model</span
-                              >
-                          </app-button>
                       </div>
-                      </div>
+                      
                     </div>
+                    <form [formGroup]="form" novalidate autocomplete="off">
+                    <div class="row" style="padding-top: 20px;">
+                      <div class="col-12 col-lg-4">
+                        <app-form-field label="Status" [required]="false" [control]="form.controls['status']"
+                             [isInline]="false">
+                            <app-select class="fw-normal" formControlName="status" (changed)="changeStatus()"
+                             [placeholder]="'Select a status'" [items]="statusList">
+                            </app-select>
+                        </app-form-field>
+                    </div>
+                        <div class="col-12 col-lg-6 pt-8 text-center" >
+                          <div class="items-center" style="width: 100%;" *ngIf="showProgressbar">
+                            <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
+                              <div class="bg-blue-600 text-xs font-bold text-xl text-blue-100 text-center p-1 leading-none rounded-full" [style.width.%]="percentage">{{ percentage }}%</div>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="col-12 col-lg-2 text-right pt-4">
+                        <app-button class="train-button" [type]="'button'" [color]="'primary'" (myclick)="start_train()">
+                          <i class="fas fa-plus"></i> &#160; <span class="btn-label">Train Model</span
+                            >
+                        </app-button>
+                    </div>
+                    </div>
+                  </form>
             </div>
             <div class="table-responsive" *ngIf="columns.length > 0">
                 <app-data-table

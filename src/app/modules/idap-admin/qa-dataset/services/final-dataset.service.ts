@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, catchError } from 'rxjs';
 import { FinalDataset } from '../types/final-dataset';
 import { StartTrainingModelResp } from '../types/start-training-model-resp';
 
@@ -20,12 +20,14 @@ export class FinalDatasetService {
     message: `start_training`
   }
   
-  getFinalDatasetList(param: any): Observable<FinalDataset[]> {
+  getFinalDatasetList(param: any, status: string): Observable<FinalDataset[]> {
     let params = new HttpParams()
       .set("limit", param.limit)
       .set("offset", param.offset)
       .set('searchText', param.searchText || '')
-    return this.http.get<FinalDataset[]>(`${this.FinalDatasetUrl}?${params.toString()}`);
+
+      return this.http
+      .post<FinalDataset[]>(`${this.FinalDatasetUrl}?${params.toString()}`, {"status": status});
   }
 
   startTrainingModel(): Observable<StartTrainingModelResp> {

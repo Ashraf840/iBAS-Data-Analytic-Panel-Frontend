@@ -6,16 +6,22 @@ import { Sort } from '@angular/material/sort';
 import { IButtonDescription } from 'src/app/utility/utils/button-description';
 import { ReplaySubject } from 'rxjs';
 import { QueryParams } from 'src/app/models';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ControlItem } from 'src/app/utility/utils/form';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { UpdateFinalDatasetComponent } from '../update-final-dataset/update-final-dataset.component';
 
 @Component({
   selector: 'app-final-dataset',
   templateUrl: './final-dataset.component.html',
-  styleUrls: ['./final-dataset.component.css']
+  styleUrls: ['./final-dataset.component.scss']
 })
 export class FinalDatasetComponent implements OnInit {
   constructor(
     private finalDatasetService: FinalDatasetService,
-    private websocketService: WebsocketService
+    private websocketService: WebsocketService,
+    private fb: FormBuilder,
+    private dialog: MatDialog
   ) {}
 
   finalDataset: any | undefined
@@ -36,6 +42,7 @@ export class FinalDatasetComponent implements OnInit {
   offset: number = 0;
 
   ngOnInit(): void {
+    this.createform();
     this.pageSizes = this.limit;
     this.websocketService.openWebsocket();
 
@@ -43,33 +50,24 @@ export class FinalDatasetComponent implements OnInit {
     //   console.log(`Percentage:`, message);
     // })
     this.getFinalDataset(this.offset, this.limit, "");
-    
   }
 
   getFinalDataset(offset: any, limit: any, searchText: string = '') {
     let params = new QueryParams(offset, limit, '', searchText);
-      this.finalDatasetService.getFinalDatasetList(params).subscribe((data : any)=> {
+      this.finalDatasetService.getFinalDatasetList(params, this.form.value.status).subscribe((data : any)=> {
         this.finalDataset = data.results;
         this.totalCount = data.count;
       });
   }
 
+  changeStatus(){
+    this.getFinalDataset(this.offset, this.limit, this.searchText);
+  }
+
   start_train() {
-    console.log(`Start training btn is clicked!`);
-    // this.isModelTraining = true;
     this.isModelTraining = true;
     this.showProgressbar = true;
     this.finalDatasetService.startTrainingModel().subscribe(resp => {
-      // console.log(`resp:`, resp);
-      
-      // if (resp?.message === "training_started") {
-      //   this.isModelTraining = true;
-      //   this.showProgressbar = true;
-      //   // this.websocketService.messages.subscribe((message) => {
-      //   //   console.log(`data:`, message);
-      //   //   console.log(typeof(message));
-      //   // });
-      // }
     });
 
     this.websocketService.messages.subscribe(val => {
@@ -79,7 +77,6 @@ export class FinalDatasetComponent implements OnInit {
         this.showProgressbar = false;
         this.percentage = 0;
       }
-      // console.log(`Value: ${val};   typeof: ${typeof(val)}`);
     });
   }
 
@@ -120,10 +117,52 @@ export class FinalDatasetComponent implements OnInit {
     { columnDef: 'id', columnDefBn: 'id', header: 'Id' },
     { columnDef: 'question', columnDefBn: 'question', header: 'Question' },
     { columnDef: 'answer', columnDefBn: 'answer', header: 'Answer' },
-    { columnDef: 'language', columnDefBn: 'language', header: 'Language' }
+    { columnDef: 'language', columnDefBn: 'language', header: 'Language' },
+    { columnDef: 'status', columnDefBn: 'status', header: 'Status' }
   ];
 
   listButton: IButtonDescription[] = [
-    
+    {
+      listener: qa => this.updatingFinalDataSet(qa),
+      text: 'Edit',
+      toolTip: 'Edit',
+      icon: 'edit',
+      disabled: qa => qa.is_added_to_qa_dataset
+    }
   ];
+
+  form!: FormGroup;
+  statusList: ControlItem[] = [
+    {
+    value: 'Trained',
+    label: "Trained"
+    }, 
+    {
+      value: 'Untrained',
+      label: "Untrained"
+      }
+];
+
+  createform() {
+    this.form = this.fb.group({
+      status: [null, {
+        updateOn: 'change', validators: null
+      }]
+    });
+  }
+
+  updatingFinalDataSet(data: any){
+    console.log(data.oid);
+    const myData = Object.assign({}, data);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width = "580px";
+    dialogConfig.data = myData;
+    this.dialog.open(UpdateFinalDatasetComponent, dialogConfig).afterClosed().subscribe(res => {
+        if(res){
+          
+        }
+    });
+  }
 }

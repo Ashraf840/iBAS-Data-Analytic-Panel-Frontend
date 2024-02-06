@@ -41,12 +41,12 @@
 
         <ng-container *ngIf="listButton.length < 3">
           
-          <button style="border: 1px solid #dee2e6;"  mat-flat-button *ngFor="let button of listButton"
+          <button style="border: 1px solid #dee2e6; text-align: center;"  mat-flat-button *ngFor="let button of listButton"
           matTooltip="{{ (button.toolTip || '') }}"
           [disabled]="(button.disabled && button.disabled(element))" 
           [color]="button.color? button.color : 'basic'" 
           (click)="announceClick(button.listener, i)" class="button-margin">
-          <mat-icon>{{button.icon || ''}}</mat-icon> <span class="d-none d-md-inline"> {{(button.text || '')}}</span>
+          <mat-icon>{{button.icon || ''}}</mat-icon><span class="d-none d-md-inline" style="font-weight: bold;"> {{(button.text || '')}}</span>
           </button>
        
         </ng-container>

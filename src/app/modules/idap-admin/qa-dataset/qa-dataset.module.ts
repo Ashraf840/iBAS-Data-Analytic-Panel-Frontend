@@ -34,6 +34,7 @@ import { WebsocketService } from './services/websocket.service';
 import { UtilityModule } from 'src/app/utility/utility.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MaterialModule } from 'src/app/shared/material.module';
+import { UpdateFinalDatasetComponent } from './update-final-dataset/update-final-dataset.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { MaterialModule } from 'src/app/shared/material.module';
     ListQuestionAnswerComponent,
     SuggestiveQaComponent,
     FinalDatasetComponent,
+    UpdateFinalDatasetComponent
   ],
   imports: [
     UtilityModule,

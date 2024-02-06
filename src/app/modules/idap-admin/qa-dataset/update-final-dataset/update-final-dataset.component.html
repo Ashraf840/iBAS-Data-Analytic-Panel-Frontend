@@ -1,0 +1,66 @@
+<div class="row main-div">
+    <div class="col-sm-12 myDiv">
+        <div class="card card-margin">
+            <form [formGroup]="form" novalidate autocomplete="off" (submit)="onSubmit()" (keyup.enter)="onSubmit()">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <h2>Update Final Dataset</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <app-form-field label="Bangla Question" [required]="true" [control]="form.controls['banglaQuestion']" [isInline]="isInline"
+                                >
+                                <app-input formControlName="banglaQuestion" [placeholder]="'Enter a Bangla Question'"></app-input>
+                            </app-form-field>
+                            
+                            <app-form-field label="English Question" [required]="true" [control]="form.controls['englishQuestion']" [isInline]="isInline"
+                                >
+                                <app-input [isDisabled]="true" formControlName="englishQuestion" [placeholder]="'Enter a Contact Number'"></app-input>
+                            </app-form-field>
+                            <app-form-field label="Transliterate Question" [required]="true" [control]="form.controls['transliterateQuestion']" [isInline]="isInline"
+                                >
+                                <app-input formControlName="transliterateQuestion" [placeholder]="'Enter a Transliterate Question'"></app-input>
+                            </app-form-field>
+                            <app-form-field label="Bangla Answer" [required]="true" [control]="form.controls['banglaAnswer']" [isInline]="isInline"
+                                >
+                                <app-input formControlName="banglaAnswer" [placeholder]="'Enter a Bangla Answer'"></app-input>
+                            </app-form-field>
+
+                            <app-form-field label="English Answer" [required]="true" [control]="form.controls['englishAnswer']" [isInline]="isInline"
+                                >
+                                <app-input formControlName="englishAnswer" [placeholder]="'Enter a English Answer'"></app-input>
+                            </app-form-field>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-end button-container">
+                    <div class="button-item">
+                        <button
+                            class="btn btn-danger"
+                                (click)="close()"
+                                >
+                                <i class="fa fa-close"></i> &#160;
+                                Close
+                        </button>
+                        <!-- <app-button (click)="close()" [type]="'button'" [color]="'warn'">Close</app-button> &#160; -->
+                    </div>
+                    <div class="button-item">
+                        <button
+                            class="btn btn-primary"
+                            (click)="close()">
+                            <i class="fa fa-paper-plane"></i> &#160;
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
