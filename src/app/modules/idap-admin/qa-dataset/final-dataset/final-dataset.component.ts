@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FinalDatasetService } from '../services/final-dataset.service';
-import { WebsocketService } from '../services/websocket.service';
+import { WebsocketService_FinalDataset } from '../services/websocket.service';
 import { Pageable, TableColumn } from 'src/app/utility/utils';
 import { Sort } from '@angular/material/sort';
 import { IButtonDescription } from 'src/app/utility/utils/button-description';
@@ -19,10 +19,10 @@ import { UpdateFinalDatasetComponent } from '../update-final-dataset/update-fina
 export class FinalDatasetComponent implements OnInit {
   constructor(
     private finalDatasetService: FinalDatasetService,
-    private websocketService: WebsocketService,
+    private WebsocketService_FinalDataset: WebsocketService_FinalDataset,
     private fb: FormBuilder,
     private dialog: MatDialog
-  ) {}
+  ) { }
 
   finalDataset: any | undefined
   isModelTraining = false
@@ -44,23 +44,23 @@ export class FinalDatasetComponent implements OnInit {
   ngOnInit(): void {
     this.createform();
     this.pageSizes = this.limit;
-    this.websocketService.openWebsocket();
+    this.WebsocketService_FinalDataset.openWebsocket();
 
-    // this.websocketService.messages.subscribe((message) => {
-    //   console.log(`Percentage:`, message);
-    // })
+    this.WebsocketService_FinalDataset.messages.subscribe((message) => {
+      console.log(`backend_message:`, message);
+    })
     this.getFinalDataset(this.offset, this.limit, "");
   }
 
   getFinalDataset(offset: any, limit: any, searchText: string = '') {
     let params = new QueryParams(offset, limit, '', searchText);
-      this.finalDatasetService.getFinalDatasetList(params, this.form.value.status).subscribe((data : any)=> {
-        this.finalDataset = data.results;
-        this.totalCount = data.count;
-      });
+    this.finalDatasetService.getFinalDatasetList(params, this.form.value.status).subscribe((data: any) => {
+      this.finalDataset = data.results;
+      this.totalCount = data.count;
+    });
   }
 
-  changeStatus(){
+  changeStatus() {
     this.getFinalDataset(this.offset, this.limit, this.searchText);
   }
 
@@ -70,7 +70,7 @@ export class FinalDatasetComponent implements OnInit {
     this.finalDatasetService.startTrainingModel().subscribe(resp => {
     });
 
-    this.websocketService.messages.subscribe(val => {
+    this.WebsocketService_FinalDataset.messages.subscribe((val: any) => {
       this.percentage = parseInt(val);
       if (this.percentage >= 100) {
         this.isModelTraining = false;
@@ -109,8 +109,8 @@ export class FinalDatasetComponent implements OnInit {
     this.destroyed$.complete();
   }
 
-  reset(){
-    
+  reset() {
+
   }
 
   columns: TableColumn[] = [
@@ -134,14 +134,14 @@ export class FinalDatasetComponent implements OnInit {
   form!: FormGroup;
   statusList: ControlItem[] = [
     {
-    value: 'Trained',
-    label: "Trained"
-    }, 
+      value: 'Trained',
+      label: "Trained"
+    },
     {
       value: 'Untrained',
       label: "Untrained"
-      }
-];
+    }
+  ];
 
   createform() {
     this.form = this.fb.group({
@@ -151,7 +151,7 @@ export class FinalDatasetComponent implements OnInit {
     });
   }
 
-  updatingFinalDataSet(data: any){
+  updatingFinalDataSet(data: any) {
     console.log(data.oid);
     const myData = Object.assign({}, data);
     const dialogConfig = new MatDialogConfig();
@@ -160,9 +160,9 @@ export class FinalDatasetComponent implements OnInit {
     dialogConfig.width = "580px";
     dialogConfig.data = myData;
     this.dialog.open(UpdateFinalDatasetComponent, dialogConfig).afterClosed().subscribe(res => {
-        if(res){
-          
-        }
+      if (res) {
+
+      }
     });
   }
 }

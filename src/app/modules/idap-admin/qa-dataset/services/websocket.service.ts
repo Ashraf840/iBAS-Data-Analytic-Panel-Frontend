@@ -4,14 +4,14 @@ import { Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class WebsocketService {
+export class WebsocketService_FinalDataset {
   websocket?: WebSocket;
   public messages: Subject<any> = new Subject();
 
   constructor() { }
 
   public openWebsocket() {
-    this.websocket = new WebSocket('ws://localhost:5000');
+    this.websocket = new WebSocket('ws://127.0.0.1:8082/ws/chatbot-model/training/statistics/');
 
     this.websocket.onopen = (event) => {
       console.log(`Websocket connect!`);

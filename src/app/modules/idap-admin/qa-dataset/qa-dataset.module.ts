@@ -30,7 +30,7 @@ import { ListQuestionAnswerComponent } from './cud_components/list-question-answ
 import { SuggestiveQaComponent } from './suggestive-qa/suggestive-qa.component';
 import { SuggestiveQaService } from './services/suggestive-qa.service';
 import { FinalDatasetComponent } from './final-dataset/final-dataset.component';
-import { WebsocketService } from './services/websocket.service';
+import { WebsocketService_FinalDataset } from './services/websocket.service';
 import { UtilityModule } from 'src/app/utility/utility.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MaterialModule } from 'src/app/shared/material.module';
@@ -63,7 +63,7 @@ import { UpdateFinalDatasetComponent } from './update-final-dataset/update-final
   exports: [QaDatasetComponent],
   providers: [
     SuggestiveQaService,
-    WebsocketService
+    WebsocketService_FinalDataset
   ],
 })
 export class QaDatasetModule { }
