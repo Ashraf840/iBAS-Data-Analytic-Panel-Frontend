@@ -1,3 +1,4 @@
 export interface GenSuggestiveQues {
-    status:string
+    status_code: number;
+    msg: string
 }

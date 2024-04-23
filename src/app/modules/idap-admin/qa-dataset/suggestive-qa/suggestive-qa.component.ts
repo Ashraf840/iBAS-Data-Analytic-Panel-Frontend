@@ -10,6 +10,9 @@ import { IButtonDescription } from 'src/app/utility/utils/button-description';
 import { Pageable, TableColumn } from 'src/app/utility/utils';
 import { Sort } from '@angular/material/sort';
 import { QueryParams } from 'src/app/models';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+
 
 
 @Component({
@@ -35,22 +38,24 @@ export class SuggestiveQaComponent implements OnInit {
 
   constructor(
     private suggestiveQaService: SuggestiveQaService,
-    private questionAnswerService:QuestionAnswerService,
-    private generateSuggestiveQaService:GenerateSuggestiveQaService,
-    private router:Router,
+    private questionAnswerService: QuestionAnswerService,
+    private generateSuggestiveQaService: GenerateSuggestiveQaService,
+    private router: Router,
   ) { }
 
   data: any | undefined;
 
   ngOnInit(): void {
+    console.log("Called this component!");
+
     this.getSuggestiveQuestionList(this.offset, this.limit, "");
   }
 
-  getSuggestiveQuestionList(offset: any, limit: any, searchText: string = ''){
+  getSuggestiveQuestionList(offset: any, limit: any, searchText: string = '') {
     let params = new QueryParams(offset, limit, '', searchText);
     this.suggestiveQaService.getSuggestiveQuesList(params).subscribe((res: any) => {
       this.totalCount = res.count;
-      this.suggestiveQues = res.data.map((i: any) => ({...i}));
+      this.suggestiveQues = res.data.map((i: any) => ({ ...i }));
     });
   }
 
@@ -61,7 +66,7 @@ export class SuggestiveQaComponent implements OnInit {
   }
 
 
-  public form : FormGroup = new FormGroup({
+  public form: FormGroup = new FormGroup({
     bangla_ques: new FormControl('', Validators.required),
     english_ques: new FormControl('', Validators.required),
     transliterated_ques: new FormControl('', Validators.required),
@@ -77,11 +82,33 @@ export class SuggestiveQaComponent implements OnInit {
   }
 
   genSuggestiveQuesSuccess() {
-    this.generateSuggestiveQaService.genSuggetiveQuesStat().subscribe((data) => {
-      console.log("Generate suggestive question payload:", data);
-      
-      Swal.fire('Completed!', 'Succesfully generated suggestive questions!', 'success')
-    });
+    this.generateSuggestiveQaService.genSuggetiveQuesStat()
+      .pipe(
+        catchError(error => {
+          // Handle the error
+          console.error('Error fetching data:', error);
+          // Optionally, rethrow the error to propagate it further
+          if (error.status === 500) {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Something went wrong!",
+            });
+          }
+          return throwError(error);
+        })
+      )
+      .subscribe((data) => {
+        console.log("Generate suggestive question payload:", data.status_code);
+        if (data.status_code === 200) {
+          Swal.fire('Completed!', 'Succesfully generated suggestive questions!', 'success')
+            .then((result) => {
+              if (result?.isConfirmed) {
+                this.ngOnInit();  // After generating suggestive-qa as paraphrased-text refresh this component since then it'll fetch the updated paraphrased text from the db
+              }
+            });
+        }
+      });
   }
 
   pageChangeEvent(event: Pageable): void {
@@ -113,8 +140,8 @@ export class SuggestiveQaComponent implements OnInit {
     this.destroyed$.complete();
   }
 
-  reset(){
-    
+  reset() {
+
   }
 
   columns: TableColumn[] = [
@@ -132,7 +159,7 @@ export class SuggestiveQaComponent implements OnInit {
       disabled: qa => qa.is_added_to_qa_dataset
     },
     {
-      listener: qa => {},
+      listener: qa => { },
       text: 'Remove',
       toolTip: 'Remove',
       icon: 'delete_forever',

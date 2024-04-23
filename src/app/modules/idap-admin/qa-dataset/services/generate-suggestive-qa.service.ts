@@ -10,11 +10,11 @@ export class GenerateSuggestiveQaService {
 
   constructor(private http: HttpClient) { }
   private GenSuggestiveUrl: string =
-    'http://127.0.0.1:5001/suggestive_ques_gen';
-  // 'http://127.0.0.1:8082/gen-suggestive-qa/';
+    // 'http://127.0.0.1:5001/suggestive_ques_gen';
+    'http://127.0.0.1:8082/gen-suggestive-qa/';
 
-  genSuggetiveQuesStat(): Observable<GenSuggestiveQues[]> {
-    return this.http.get<GenSuggestiveQues[]>(this.GenSuggestiveUrl);
+  genSuggetiveQuesStat(): Observable<GenSuggestiveQues> {
+    return this.http.get<GenSuggestiveQues>(this.GenSuggestiveUrl);
   }
 
   // genSuggetiveQuesStat(){
