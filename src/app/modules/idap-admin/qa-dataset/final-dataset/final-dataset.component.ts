@@ -10,6 +10,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ControlItem } from 'src/app/utility/utils/form';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UpdateFinalDatasetComponent } from '../update-final-dataset/update-final-dataset.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-final-dataset',
@@ -19,7 +20,7 @@ import { UpdateFinalDatasetComponent } from '../update-final-dataset/update-fina
 export class FinalDatasetComponent implements OnInit {
   constructor(
     private finalDatasetService: FinalDatasetService,
-    private WebsocketService_FinalDataset: WebsocketService_FinalDataset,
+    private websocketService_finalDataset: WebsocketService_FinalDataset,
     private fb: FormBuilder,
     private dialog: MatDialog
   ) { }
@@ -44,11 +45,20 @@ export class FinalDatasetComponent implements OnInit {
   ngOnInit(): void {
     this.createform();
     this.pageSizes = this.limit;
-    this.WebsocketService_FinalDataset.openWebsocket();
+    this.websocketService_finalDataset.openWebsocket();
 
-    this.WebsocketService_FinalDataset.messages.subscribe((message) => {
-      console.log(`backend_message:`, message);
+    this.websocketService_finalDataset.messages.subscribe((message) => {
+      const data = JSON.parse(message);
+      this.percentage = parseInt(data?.message);
+      // console.log(`backend_message:`, this.percentage);
+      if (this.percentage >= 100) {
+        this.isModelTraining = false;
+        this.showProgressbar = false;
+        this.percentage = 0;
+        Swal.fire('Completed!', 'Rasa model training successful!', 'success')
+      }
     })
+
     this.getFinalDataset(this.offset, this.limit, "");
   }
 
@@ -67,17 +77,20 @@ export class FinalDatasetComponent implements OnInit {
   start_train() {
     this.isModelTraining = true;
     this.showProgressbar = true;
+
+    // Hits the Django backend API to invoke the model training
     this.finalDatasetService.startTrainingModel().subscribe(resp => {
+      console.log("Response:", resp);
     });
 
-    this.WebsocketService_FinalDataset.messages.subscribe((val: any) => {
-      this.percentage = parseInt(val);
-      if (this.percentage >= 100) {
-        this.isModelTraining = false;
-        this.showProgressbar = false;
-        this.percentage = 0;
-      }
-    });
+    // this.websocketService_finalDataset.messages.subscribe((val: any) => {
+    //   this.percentage = parseInt(val);
+    //   if (this.percentage >= 100) {
+    //     this.isModelTraining = false;
+    //     this.showProgressbar = false;
+    //     this.percentage = 0;
+    //   }
+    // });
   }
 
   pageChangeEvent(event: Pageable): void {
