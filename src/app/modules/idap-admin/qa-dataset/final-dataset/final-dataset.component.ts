@@ -48,15 +48,32 @@ export class FinalDatasetComponent implements OnInit {
     this.websocketService_finalDataset.openWebsocket();
 
     this.websocketService_finalDataset.messages.subscribe((message) => {
+      // console.log(message)
       const data = JSON.parse(message);
+      console.log(data?.message)
       this.percentage = parseInt(data?.message);
-      // console.log(`backend_message:`, this.percentage);
+      if (this.percentage > 0 && this.percentage < 100) {
+        this.isModelTraining = true;
+        this.showProgressbar = true;
+      }
       if (this.percentage >= 100) {
         this.isModelTraining = false;
         this.showProgressbar = false;
         this.percentage = 0;
         Swal.fire('Completed!', 'Rasa model training successful!', 'success')
       }
+
+
+      // OK: For sending dummy training progress percentage
+      // const data = JSON.parse(message);
+      // this.percentage = parseInt(data?.message);
+      // // console.log(`backend_message:`, this.percentage);
+      // if (this.percentage >= 100) {
+      //   this.isModelTraining = false;
+      //   this.showProgressbar = false;
+      //   this.percentage = 0;
+      //   Swal.fire('Completed!', 'Rasa model training successful!', 'success')
+      // }
     })
 
     this.getFinalDataset(this.offset, this.limit, "");
