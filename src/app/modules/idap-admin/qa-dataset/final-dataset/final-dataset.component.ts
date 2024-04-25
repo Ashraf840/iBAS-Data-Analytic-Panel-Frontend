@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FinalDatasetService } from '../services/final-dataset.service';
 import { WebsocketService_FinalDataset } from '../services/websockets/finalDataset.websocket.service';
 import { Pageable, TableColumn } from 'src/app/utility/utils';
@@ -17,7 +17,7 @@ import Swal from 'sweetalert2';
   templateUrl: './final-dataset.component.html',
   styleUrls: ['./final-dataset.component.scss']
 })
-export class FinalDatasetComponent implements OnInit {
+export class FinalDatasetComponent implements OnInit, OnDestroy {
   constructor(
     private finalDatasetService: FinalDatasetService,
     private websocketService_finalDataset: WebsocketService_FinalDataset,
@@ -142,6 +142,7 @@ export class FinalDatasetComponent implements OnInit {
   ngOnDestroy(): void {
     this.destroyed$.next(true);
     this.destroyed$.complete();
+    this.websocketService_finalDataset.closeWebsocket();
   }
 
   reset() {

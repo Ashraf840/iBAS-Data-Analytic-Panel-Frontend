@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { SuggestiveQaService } from '../services/suggestive-qa.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { QuestionAnswerService } from '../services/question-answer.service';
@@ -21,7 +21,7 @@ import { WebsocketService_SuggestiveQa } from '../services/websockets/suggestive
   templateUrl: './suggestive-qa.component.html',
   styleUrls: ['./suggestive-qa.component.scss']
 })
-export class SuggestiveQaComponent implements OnInit {
+export class SuggestiveQaComponent implements OnInit, OnDestroy {
   suggestiveQues: any | undefined;
   suggestiveQuesText: string[][] = [];
   nextId: number = 1;
@@ -148,6 +148,8 @@ export class SuggestiveQaComponent implements OnInit {
   ngOnDestroy(): void {
     this.destroyed$.next(true);
     this.destroyed$.complete();
+    // console.log("SuggestiveQaComponent component is destroyed!");
+    this.websocketService_suggestiveQa.closeWebsocket();
   }
 
   reset() {
