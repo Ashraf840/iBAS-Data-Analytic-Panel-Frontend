@@ -71,6 +71,25 @@ export class SuggestiveQaComponent implements OnInit, OnDestroy {
       if (seggregation_status === trigger_stop_str) {
         this.loading = false;
         Swal.fire('Completed!', 'Successfully generated paraphrased text from augmented queries!', 'success')
+          .then((result) => {
+            if (result?.isConfirmed) {
+              // TODO: Make the loader to true to show the loader on screen
+              this.suggestiveQaService.pushUpdatedSuggestiveQA().subscribe((res: any) => {
+                // console.log("Pushed the updated paraphrased text into the DB!");
+                console.log("Result:", res);
+                if (parseInt(res?.status_code) === 200) {
+                  Swal.fire('Successful!', 'Successfully updated the databse with new suggestive Q/A!', 'success')
+                    .then((result) => {
+                      if (result?.isConfirmed) {
+                        this.ngOnDestroy();
+                        this.ngOnInit();  // After generating suggestive-qa as paraphrased-text refresh this component since then it'll fetch the updated paraphrased text from the db
+                      }
+                    });
+                }
+              });
+
+            }
+          });
       }
     })
 
@@ -134,9 +153,6 @@ export class SuggestiveQaComponent implements OnInit, OnDestroy {
               if (result?.isConfirmed) {
                 // TODO: Make the loader to true to show the loader on screen
                 this.loading = true;
-
-                // this.ngOnDestroy();
-                // this.ngOnInit();  // After generating suggestive-qa as paraphrased-text refresh this component since then it'll fetch the updated paraphrased text from the db
               }
             });
         }

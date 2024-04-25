@@ -3,6 +3,10 @@ export interface SuggestiveQues {
     count: number;
 }
 
+export interface PushSuggestiveQA {
+    msg: string;
+}
+
 export interface SuggestiveQuesDetails {
     id: string;
     text: string;
