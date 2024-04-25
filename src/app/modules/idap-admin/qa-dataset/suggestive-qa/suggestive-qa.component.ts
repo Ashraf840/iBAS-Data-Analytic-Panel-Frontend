@@ -12,6 +12,7 @@ import { Sort } from '@angular/material/sort';
 import { QueryParams } from 'src/app/models';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { WebsocketService_SuggestiveQa } from '../services/websockets/suggestive-qa-websocket.service';
 
 
 
@@ -40,6 +41,7 @@ export class SuggestiveQaComponent implements OnInit {
     private suggestiveQaService: SuggestiveQaService,
     private questionAnswerService: QuestionAnswerService,
     private generateSuggestiveQaService: GenerateSuggestiveQaService,
+    private websocketService_suggestiveQa: WebsocketService_SuggestiveQa,
     private router: Router,
   ) { }
 
@@ -47,6 +49,14 @@ export class SuggestiveQaComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("Called this component!");
+
+    this.websocketService_suggestiveQa.openWebsocket();
+
+    this.websocketService_suggestiveQa.messages.subscribe((message) => {
+      console.log(message)
+      // const data = JSON.parse(message);
+      // console.log(data?.message)
+    })
 
     this.getSuggestiveQuestionList(this.offset, this.limit, "");
   }

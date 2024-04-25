@@ -4,17 +4,17 @@ import { Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class WebsocketService_FinalDataset {
+export class WebsocketService_SuggestiveQa {
   websocket?: WebSocket;
   public messages: Subject<any> = new Subject();
 
   constructor() { }
 
   public openWebsocket() {
-    this.websocket = new WebSocket('ws://127.0.0.1:8082/ws/chatbot-model/training/statistics/');
+    this.websocket = new WebSocket('ws://127.0.0.1:8082/ws/data-seggregator/loading/status/');
 
     this.websocket.onopen = (event) => {
-      console.log(`Final dataset component's websocket connected!`);
+      console.log(`Generate suggestive Q/A's websocket connected!`);
     }
 
     this.websocket.onmessage = (event) => {
@@ -23,7 +23,7 @@ export class WebsocketService_FinalDataset {
     }
 
     this.websocket.onclose = (event) => {
-      console.log(`Final dataset component's websocket closed!`);
+      console.log(`Generate suggestive Q/A's websocket closed!`);
     }
   }
 

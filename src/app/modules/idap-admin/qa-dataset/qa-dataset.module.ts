@@ -31,6 +31,7 @@ import { SuggestiveQaComponent } from './suggestive-qa/suggestive-qa.component';
 import { SuggestiveQaService } from './services/suggestive-qa.service';
 import { FinalDatasetComponent } from './final-dataset/final-dataset.component';
 import { WebsocketService_FinalDataset } from './services/websockets/finalDataset.websocket.service';
+import { WebsocketService_SuggestiveQa } from './services/websockets/suggestive-qa-websocket.service';
 import { UtilityModule } from 'src/app/utility/utility.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MaterialModule } from 'src/app/shared/material.module';
@@ -63,7 +64,8 @@ import { UpdateFinalDatasetComponent } from './update-final-dataset/update-final
   exports: [QaDatasetComponent],
   providers: [
     SuggestiveQaService,
-    WebsocketService_FinalDataset
+    WebsocketService_FinalDataset,
+    WebsocketService_SuggestiveQa,
   ],
 })
 export class QaDatasetModule { }
