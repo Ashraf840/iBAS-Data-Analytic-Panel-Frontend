@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FinalDatasetService } from '../services/final-dataset.service';
-import { WebsocketService_FinalDataset } from '../services/websocket.service';
+import { WebsocketService_FinalDataset } from '../services/websockets/finalDataset.websocket.service';
 import { Pageable, TableColumn } from 'src/app/utility/utils';
 import { Sort } from '@angular/material/sort';
 import { IButtonDescription } from 'src/app/utility/utils/button-description';
@@ -45,6 +45,7 @@ export class FinalDatasetComponent implements OnInit {
   ngOnInit(): void {
     this.createform();
     this.pageSizes = this.limit;
+
     this.websocketService_finalDataset.openWebsocket();
 
     this.websocketService_finalDataset.messages.subscribe((message) => {
@@ -52,10 +53,14 @@ export class FinalDatasetComponent implements OnInit {
       const data = JSON.parse(message);
       console.log(data?.message)
       this.percentage = parseInt(data?.message);
+
+      // Starts showing the progress bar even if the client refreshes the page
       if (this.percentage > 0 && this.percentage < 100) {
         this.isModelTraining = true;
         this.showProgressbar = true;
       }
+
+      // After completing the model training, the progress bar will be hidden & the percentage value will be reset to zero (0)
       if (this.percentage >= 100) {
         this.isModelTraining = false;
         this.showProgressbar = false;

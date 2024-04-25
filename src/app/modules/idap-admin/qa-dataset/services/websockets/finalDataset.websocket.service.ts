@@ -14,7 +14,7 @@ export class WebsocketService_FinalDataset {
     this.websocket = new WebSocket('ws://127.0.0.1:8082/ws/chatbot-model/training/statistics/');
 
     this.websocket.onopen = (event) => {
-      console.log(`Websocket connect!`);
+      console.log(`Final dataset component's websocket connected!`);
     }
 
     this.websocket.onmessage = (event) => {
