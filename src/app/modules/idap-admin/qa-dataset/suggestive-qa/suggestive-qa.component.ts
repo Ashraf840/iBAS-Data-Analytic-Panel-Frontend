@@ -37,6 +37,8 @@ export class SuggestiveQaComponent implements OnInit, OnDestroy {
   limit: number = 10;
   offset: number = 0;
 
+  loading: boolean = false;
+
   constructor(
     private suggestiveQaService: SuggestiveQaService,
     private questionAnswerService: QuestionAnswerService,
@@ -48,17 +50,33 @@ export class SuggestiveQaComponent implements OnInit, OnDestroy {
   data: any | undefined;
 
   ngOnInit(): void {
-    console.log("Called this component!");
+    // console.log("Called this component!");
 
     this.websocketService_suggestiveQa.openWebsocket();
 
     this.websocketService_suggestiveQa.messages.subscribe((message) => {
-      console.log(message)
-      // const data = JSON.parse(message);
-      // console.log(data?.message)
+      // console.log(message)
+      const data = JSON.parse(message);
+      console.log(data?.message)
+
+      let str = data?.message
+
+      const endIndex = str.indexOf("!");
+
+      // Extract the desired substring
+      const seggregation_status = str.substring(0, endIndex + 1);
+
+      let trigger_stop_str = "Excel file created successfully!";
+
+      if (seggregation_status === trigger_stop_str) {
+        this.loading = false;
+        Swal.fire('Completed!', 'Successfully generated paraphrased text from augmented queries!', 'success')
+      }
     })
 
     this.getSuggestiveQuestionList(this.offset, this.limit, "");
+
+    // [Test] Use a basic loader on screen
   }
 
   getSuggestiveQuestionList(offset: any, limit: any, searchText: string = '') {
@@ -111,10 +129,14 @@ export class SuggestiveQaComponent implements OnInit, OnDestroy {
       .subscribe((data) => {
         console.log("Generate suggestive question payload:", data.status_code);
         if (data.status_code === 200) {
-          Swal.fire('Completed!', 'Succesfully generated suggestive questions!', 'success')
+          Swal.fire('Started!', 'Started generating paraphrased text from augmented queries!', 'success')
             .then((result) => {
               if (result?.isConfirmed) {
-                this.ngOnInit();  // After generating suggestive-qa as paraphrased-text refresh this component since then it'll fetch the updated paraphrased text from the db
+                // TODO: Make the loader to true to show the loader on screen
+                this.loading = true;
+
+                // this.ngOnDestroy();
+                // this.ngOnInit();  // After generating suggestive-qa as paraphrased-text refresh this component since then it'll fetch the updated paraphrased text from the db
               }
             });
         }
@@ -152,9 +174,7 @@ export class SuggestiveQaComponent implements OnInit, OnDestroy {
     this.websocketService_suggestiveQa.closeWebsocket();
   }
 
-  reset() {
-
-  }
+  reset() { }
 
   columns: TableColumn[] = [
     { columnDef: 'id', columnDefBn: 'id', header: 'Id' },
